@@ -166,4 +166,8 @@ def page12_runQuery(n_clicks, value):
                 html.Hr()
             ])
         except Exception as e:
-            return html.Div([html.H4(str(e))])
+            strr = str(e)
+            parse = strr.split(")")
+            parse1 = parse[1].split("[")
+            print(parse1[0])
+            return html.Div([html.H4(str(parse1[0]))])
