@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style type="text/css">
+		.topButton
+        {
+            color: white;
+        }
+        .topButton:hover
+        {
+            color: royalblue;
+        }
+        .topButton:active
+        {
+            color: royalblue;
+        }
+        #bottomText1
+		{
+            position: fixed;
+            bottom: 2%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        #bottomText2
+		{
+            position: fixed;
+            bottom: 4%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        #bottomText3
+		{
+            position: fixed;
+            bottom: 6%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        .submitButon
+        {
+            position: fixed;
+            height: 6%;
+            width:10%;
+            top: 73%;
+            left: 44.5%;
+            background: white;
+            border: 1px solid royalblue;
+            box-shadow: royalblue;
+            font-family: Ubuntu;
+            font-size: 100%;
+            color: black;
+        }
+        .submitButon:hover
+        {
+            position: fixed;
+            height: 6%;
+            width:10%;
+            top: 73%;
+            left: 44.5%;
+            background: royalblue;
+            border: 1px solid white;
+            box-shadow: royalblue;
+            font-family: Ubuntu;
+            font-size: 100%;
+            color: white;
+        }
+	</style>
+
+     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+
+    <script>
+    var config =
+        {
+            apiKey: "AIzaSyDiYMG5vckhfwx3FX6bJdwSO95_4jzHIvg",
+            authDomain: "easyml-3ac11.firebaseapp.com",
+            databaseURL: "https://easyml-3ac11.firebaseio.com",
+            projectId: "easyml-3ac11",
+            storageBucket: "easyml-3ac11.appspot.com",
+            messagingSenderId: "565149087386"
+        };
+    firebase.initializeApp(config);
+    </script>
+
+    <script type="text/javascript">
+        var firebaseRef = firebase.database().ref();
+
+        function checkEmailExistance(mail_id)
+        {
+            firebase.database().ref('/Account/').once('value').then(function(datasnapshot)
+            {
+                var comments= datasnapshot.val();
+                for(var key in comments)
+                {
+                    if(comments.hasOwnProperty(key))
+                    {
+                        var commentData=comments[key];
+                        var email=commentData.Email;
+                        if(mail_id == email)
+                        {
+                            alert('This mail address is already in use. Please use another one.');
+                            return false;
+                        }
+                    }
+                }
+                firebaseRef.child("Account").push().set(
+                    {
+                        Email: document.getElementById("mailInput").value,
+                        Password: document.getElementById("passwordInput").value,
+                        UserName: document.getElementById("nameInput").value,
+
+                    });
+                alert("Account created successfully!");
+                document.getElementById("mailInput").value="";
+                document.getElementById("passwordInput").value="";
+                document.getElementById("passwordInput2").value="";
+                document.getElementById("nameInput").value="";
+                location.assign('/');
+            });
+        }
+
+        function checkEmailValidation(a)
+        {
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(!filter.test(a))return false;
+            else
+                return true;
+        }
+
+
+        function register()
+        {
+            var userName=document.getElementById("nameInput").value;
+            var mailAddress=document.getElementById("mailInput").value;
+            var pass1=document.getElementById("passwordInput").value;
+            var pass2=document.getElementById("passwordInput2").value;
+            if(userName=="" || mailAddress=="" || pass1=="" || pass2=="")
+            {
+                alert("Please enter a username, your e-mail address and password to continue.");
+                return;
+            }
+
+            if(!checkEmailValidation(mailAddress))
+            {
+                alert("Please enter a valid e-mail address.");
+                return;
+            }
+            if(pass1!=pass2)
+            {
+                alert("Passwords do not match.");
+                return;
+            }
+            if(!checkEmailExistance(mailAddress))
+            {
+                return;
+            }
+        }
+
+	</script>
+</head>
+<body>
+
+    <img src="/static/Images/bg2indigo.jpg" style="position: fixed; left: 0%; height: 100%; width: 100%;">
+
+    <div style="position:fixed; top: 0%; left: 0%; width: 100%; height: 15%; background: black">
+        <a href=".." style="color: royalblue; text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 4.6%; position: fixed; font-size: 155%">
+            <img src="/static/Images/EasyMLLogo2.png" style="height: 13%; width: 30%">
+        </a>
+        <a href="request" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 12%">Request</a>
+        <a href="" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 19.5%">Sign Up</a>
+        <a href="aboutUs" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 26.2%">About Us</a>
+    </div>
+
+    <div style="background: whitesmoke; position: fixed; border: 1px solid black;
+     left: 32%; width: 36%; top: 21%; height: 65%"></div>
+
+    <p style="position: fixed; top: 18%; left: 45.35%; font-family: Ubuntu;
+     border-bottom: 1px solid black;font-size: 200%">Sign Up</p>
+
+    <h2><input type="text" id="nameInput" style="left: 35%; position: fixed; top:33%; height: 5.5%;
+                    width: 30%; font-family: Ubuntu; font-size: 75%;
+                     border: 1px solid black; border-color: black;"
+               placeholder=" Enter a username..."></h2>
+
+    <h2><input type="email" id="mailInput" style="left: 35%; position: fixed; top:42%; height: 5.5%;
+                    width: 30%; font-family: Ubuntu; font-size: 75%;
+                     border: 1px solid black; border-color: black;"
+               placeholder=" Enter an e-mail address..."></h2>
+
+    <h2><input type="password" id="passwordInput" style="left: 35%; position: fixed; top:51%; height: 5.5%;
+                    width: 30%; font-family: Ubuntu; font-size: 75%;
+                     border: 1px solid black; border-color: black;"
+               placeholder=" Enter a password..."></h2>
+
+    <h2><input type="password" id="passwordInput2" style="left: 35%; position: fixed; top:60%; height: 5.5%;
+                    width: 30%; font-family: Ubuntu; font-size: 75%;
+                     border: 1px solid black; border-color: black;"
+               placeholder=" Enter the password again..."></h2>
+
+    <button class="submitButon" onclick="register()">Submit</button>
+
+    <p id="bottomText3" align="center">
+        _________________________________________________________________________________________________________________________________________________________
+    </p>
+    <p id="bottomText2" align="center">EasyML is a free-to-use tool for data analysis and visualizing data using various Machine Learning algorithms.</p>
+    <p id="bottomText1" align="center">We own none of the photos and logos used here.</p>
+</body>
+</html>

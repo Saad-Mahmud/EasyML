@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        .topButton
+        {
+            color: white;
+        }
+        .topButton:hover
+        {
+            color: royalblue;
+        }
+        .topButton:active
+        {
+            color: royalblue;
+        }
+        #bottomText1
+		{
+            position: fixed;
+            bottom: 2%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        #bottomText2
+		{
+            position: fixed;
+            bottom: 4%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        #bottomText3
+		{
+            position: fixed;
+            bottom: 6%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        .Buttons
+        {
+            background: ghostwhite;
+            border: 1px solid royalblue;
+            color: black;
+            width: 10%;
+            height: 6%;
+        }
+        .Buttons:hover
+        {
+            background: royalblue;
+            border: 1px solid white;
+            color:white;
+        }
+        .algoName
+        {
+            position: fixed;
+            top: 15.7%;
+            font-family: Ubuntu;
+            font-size: 99%;
+            color: black;
+            text-decoration: none;
+        }
+        .algoName:hover
+        {
+            position: fixed;
+            top: 15.7%;
+            font-family: Ubuntu;
+            font-size: 99%;
+            color: royalblue;
+            text-decoration: none;
+        }
+
+	</style>
+
+    <script type="text/javascript">
+        var page=1;
+        discussionPage='/discussions/dimensionalityreduction2d';
+        placeHolderPage="/test";
+        visualizingPage=placeHolderPage;
+
+        function goToAlgorithm()
+        {
+            self.location=visualizingPage;
+        }
+        function goToDiscussion()
+        {
+            self.location=discussionPage;
+        }
+        function goRight()
+        {
+            page=(page%16)+1;
+            replaceAlgos(page);
+        }
+        function goLeft()
+        {
+            page--;
+            if(page<=0)page=16;
+            replaceAlgos(page);
+        }
+        function replaceAlgos(a)
+        {
+            if(a==1)
+            {
+                discussionPage='/discussions/dimensionalityreduction2d';
+                visualizingPage='/page1'
+            }
+            else if(a==2)
+            {
+                discussionPage='/discussions/dataframeedit';
+                visualizingPage='/page2'
+            }
+            else if(a==3)
+            {
+                discussionPage='/discussions/dimensionalitymodel';
+                visualizingPage='/page3'
+            }
+            else if(a==4)
+            {
+                discussionPage='/discussions/dimensionalityreduction3d';
+                visualizingPage='/page4'
+            }
+            else if(a==5)
+            {
+                discussionPage='/discussions/kneighborsclassifier';
+                visualizingPage='/page5'
+            }
+            else if(a==6)
+            {
+                discussionPage='/discussions/logisticregression';
+                visualizingPage='/page6'
+            }
+            else if(a==7)
+            {
+                discussionPage='/discussions/decisiontreeclassifieranalysis';
+                visualizingPage='/page7'
+            }
+            else if(a==8)
+            {
+                discussionPage='/discussions/randomforest';
+                visualizingPage='/page8'
+            }
+            else if(a==9)
+            {
+                discussionPage='/discussions/3layeredperceptronclassifieranalysis';
+                visualizingPage='/page9'
+            }
+            else if(a==10)
+            {
+                discussionPage='/discussions/svm';
+                visualizingPage='/page10'
+            }
+            else if(a==11)
+            {
+                discussionPage='/discussions/featureselect';
+                visualizingPage='/page11'
+            }
+            else if(a==12)
+            {
+                discussionPage='/discussions/dataframeedit';
+                visualizingPage='/page12'
+            }
+            else if(a==13)
+            {
+                discussionPage='/discussions/adaboost';
+                visualizingPage='/page13'
+            }
+            else if(a==14)
+            {
+                discussionPage='/discussions/votingclassifier';
+                visualizingPage='/page14'
+            }
+            else if(a==15)
+            {
+                discussionPage='/discussions/univariatefeature';
+                visualizingPage='/page15'
+            }
+            else if(a==16)
+            {
+                discussionPage='/discussions/variancethreshold';
+                visualizingPage='/page16'
+            }
+        }
+	</script>
+</head>
+<body style="position: fixed">
+
+    <div style="position:fixed; top: 0%; left: 0%; width: 100%; height: 15%; background: black">
+        <a href="" style="color: royalblue; text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 4.3%; position: fixed; font-size: 155%">
+            <img src="/static/Images/EasyMLLogo2.png" style="height: 12%; width: 30%">
+        </a>
+        <a href="request" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 12%">Request</a>
+        <a href="signup" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 19.5%">Sign Up</a>
+        <a href="aboutUs" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 26.2%">About Us</a>
+    </div>
+
+
+    <div>
+        <div id="myCarousel" class="carousel slide" data-interval="false" data-ride="carousel"
+                                                    style="position: fixed; text-align: center;
+                                                    top: 15%; width: 100%; height: 85%;
+                                                    background: transparent;
+                                                        font-family: Ubuntu; font-size: 500%">
+
+  <div class="carousel-inner" >
+    <div href="test" class="item active">
+        <img src="/static/Images/bg2.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 9.25%; top: 21%">DIMENSIONALITY REDUCTION 2D</a>
+    </div>
+
+    <div href="test" class="item">
+        <img src="/static/Images/bg2black.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 24.5%; top: 19%">DATAFRAME EDITOR<br>(VISUAL)</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2indigo.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 27%; top: 9%">DIMENTSIONALITY<br>REDUCTION<br>MODEL ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2bottlegreen.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 9.25%; top: 21%">DIMENSIONALITY REDUCTION 3D</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2yellow.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 18.5%">K NEIGHBORS CLASSIFIER<br>ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2orange.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 22%">LOGISTIC REGRESSION<br>CLASSIFIER ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2brown.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 25.5%">DECISION TREE<br>CLASSIFIER ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2red.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 25.5%">RANDOM FOREST<br>CLASSIFIER ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2yellow.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 21.5%">3-LAYERED PERCEPTRON<br>CLASSIFIER ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2bottlegreen.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 18.5%; top: 21%">SVM CLASSIFIER ANALYSIS</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2indigo.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 24%; top: 21%">FEATURE SELECTION</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2black.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 23%; top: 19%">DATAFRAME EDITOR<br>(SQL)</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2yellow.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 36%; top: 21%">ADABOOST</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2bottlegreen.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 25%; top: 21%">VOTING CLASSIFIER</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2brown.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 9.5%; top: 21%">UNIVARIATE FEATURE SELECTION</a>
+    </div>
+
+      <div href="test" class="item">
+        <img src="/static/Images/bg2black.jpg" style="height: 100%; width: 100%;">
+        <a href="test" class="algoName" style="left: 23%; top: 21%">VARIANCE THRESHOLD</a>
+    </div>
+
+  </div>
+
+  <img id="leftButton" src="/static/Images/left4.png" onclick="goLeft()" class="left carousel-control"
+       style="top: 33%; left: 5%; height: 11%; width: 2.5%; background: transparent"
+       href="#myCarousel" data-slide="prev">
+
+  <img id="rightButton" src="/static/Images/right4.png" onclick="goRight()" class="right carousel-control"
+       style="top: 33%; right: 5%; height: 11%; width: 2.5%; background: transparent"
+       href="#myCarousel" data-slide="next">
+
+</div>
+    </div>
+
+
+    <p>
+        <button onclick="goToAlgorithm()" class="Buttons" style="position: fixed;left: 39.5%;
+                                                                    top:73%;font-family: Ubuntu Light;
+                                                                font-size: 126%;">Visualize</button>
+        <button onclick="goToDiscussion()" class="Buttons" style="position: fixed; left: 50%;
+                                                                     top:73%;font-family: Ubuntu Light;
+                                                                     font-size: 126%">Discussion</button>
+    </p>
+
+
+    <p id="bottomText3" align="center">
+        _________________________________________________________________________________________________________________________________________________________
+    </p>
+    <p id="bottomText2" align="center">EasyML is a free-to-use tool for data analysis and visualizing data using various Machine Learning algorithms.</p>
+    <p id="bottomText1" align="center">We own none of the photos and logos used here.</p>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

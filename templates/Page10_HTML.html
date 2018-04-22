@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Collapsible sidebar using Bootstrap 3</title>
+        <style type="text/css">
+           body { background: white !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+        </style>
+
+         <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style4.css') }}">
+    </head>
+    <body>
+
+
+        <div id="content" style="position: relative">
+
+                <nav class="navbar navbar-expand navbar-dark bg-dark" style="position: fixed; top:0%; width: 100%; left: 0%; height: 10%;">
+                    <a class="navbar-brand" href=".." style="color: royalblue; text-decoration:
+                     none; font-family: Ubuntu;margin-left: 1.5%; top: 1%; margin-right: -10%;
+                      ">
+                        <img src="/static/Images/EasyMLLogo2.png" style="height: 15%; width: 42%">
+                    </a>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-iteme active">
+                        <a class="nav-link" href="/discussions/svm">Discussion</a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="../aboutUs">About us</a>
+                      </li>
+                    </ul>
+                  </div>
+                </nav>
+
+            <div class="wrapper" >
+
+            <!-- Sidebar Holder -->
+            <nav id="sidebar" style="position: fixed; top:10%; width: 100%;
+            height: 100%; left: 0%">
+                <div class="sidebar-header">
+                    <h3>Menu</h3>
+                    <strong>BS</strong>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="#dataProcessSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-home"></i>
+                            Data Process
+                        </a>
+                        <ul class="collapse list-unstyled" id="dataProcessSubmenu">
+                            <li><a href="/page1">Dataframe Editor(Visual)</a></li>
+                            <li><a href="/page12">Dataframe Editor(SQL)</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#featureEngineeringSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-briefcase"></i>
+                            Feature Engineering
+                        </a>
+                        <ul class="collapse list-unstyled" id="featureEngineeringSubmenu">
+                            <li><a href="/page1">Dimensionality Reduction 2D</a></li>
+                            <li><a href="/page3">Dimensionality Reduction Model Analysis</a></li>
+                            <li><a href="/page4">Dimensionality Reduction 3D</a></li>
+                            <li><a href="/page11">Feature Selection</a></li>
+                            <li><a href="/page15">Univariate Feature Selection</a></li>
+                            <li><a href="/page16">Variance Threshold</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#classifierSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-link"></i>
+                            Classifier Model
+                        </a>
+                            <ul class="collapse list-unstyled" id="classifierSubmenu">
+                                <li><a href="/page5">K Neighbors Classifier Analysis</a></li>
+                                <li><a href="/page6">Logistic Regression Classifier Analysis</a></li>
+                                <li><a href="/page7">Decision Tree Classifier Analysis</a></li>
+                                <li><a href="/page8">Random Forest Classifier Analysis</a></li>
+                                <li><a href="/page9">3 Layered Perceptron Classifier</a></li>
+                                <li><a href="/page10">SVM</a></li>
+                                <li><a href="/page13">Adaboost</a></li>
+                                <li><a href="/page14">Voting Classifier</a></li>
+                            </ul>
+                    </li>
+                </ul>
+
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div class="embed-responsive embed-responsive-16by9" style="position: fixed; left: 20%; top: 15%; width: 80%;">
+                <iframe class="embed-responsive-item" src="/test/page10" ></iframe>
+            </div>
+            </div>
+
+        </div>
+
+
+
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </body>
+</html>

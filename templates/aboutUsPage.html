@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style type="text/css">
+		.topButton
+        {
+            color: white;
+        }
+        .topButton:hover
+        {
+            color: royalblue;
+        }
+        .topButton:active
+        {
+            color: royalblue;
+        }
+        .creditClass
+        {
+            position: fixed;
+            top: 0%;
+            text-align: center;
+            font-family: Ubuntu;
+            font-size: 126%;
+            animation-duration: 60s;
+            animation-name: credits;
+        }
+
+        @keyframes credits
+        {
+            0% { top:  100%; }
+            100% { top: -500%; }
+        }
+
+	</style>
+    <script type="text/javascript">
+        var audio = new Audio('/static/Sounds/parksandrec.mp3');
+        audio.play();
+        audio.onended = function()
+        {
+            location.assign('/');
+        };
+    </script>
+</head>
+<body background="/static/Images/bg2.jpg" style="position: fixed">
+
+    <p class="creditClass" style="left:27.1%;">EasyML is a free-to-use online data analysis and visualizer tool which</p>
+    <p class="creditClass" style="left:26.9%; animation-delay: 2s">utilizes several machine learning algorithms to fulfil the users’ needs</p>
+    <p class="creditClass" style="left:39.3%; animation-delay: 4s">according to their supplied data.</p>
+
+    <p class="creditClass" style="color: royalblue;left:44.5%; animation-delay: 6s">Special Thanks:</p>
+    <p class="creditClass" style="left:20.5%; animation-delay: 8s">Dr. Sarker Tanveer Ahmed Rumee, Assistant Professor, Dept. of CSE, University of Dhaka</p>
+    <p class="creditClass" style="left:29.5%; animation-delay: 10s">Md. Mofijul Islam, Lecturer, Dept. of CSE, University of Dhaka</p>
+
+    <p class="creditClass" style="color: royalblue;left:46.3%; animation-delay: 12s">Made by:</p>
+    <p class="creditClass" style="left:43%; animation-delay: 14s">Saaduddin Mahmud</p>
+    <p class="creditClass" style="left:45.8%; animation-delay: 16s">Palash Roy</p>
+    <p class="creditClass" style="left:41.7%; animation-delay: 18s">Monoshiz Mahbub Khan</p>
+    <p class="creditClass" style="top: -10%;left:27.1%; animation-delay: 25s; font-size: 300%"><span>Thank you for using Easy</span><span style="color: royalblue">ML</span></p>
+
+
+    <div style="position:fixed; top: 0%; left: 0%; width: 100%; height: 15%; background: black">
+        <a href=".." style="color: royalblue; text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 4.6%; position: fixed; font-size: 155%">
+            <img src="/static/Images/EasyMLLogo2.png" style="height: 13%; width: 30%">
+        </a>
+        <a href="request" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 12%">Request</a>
+        <a href="signup" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 19.5%">Sign Up</a>
+        <a href="" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 26.2%">About Us</a>
+    </div>
+
+</body>
+</html>
