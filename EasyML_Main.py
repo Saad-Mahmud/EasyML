@@ -2,30 +2,22 @@ from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table_experiments as dt
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
-import base64
-import datetime
-import io
 from EasyML_Init import EM_App
-import EasyML_Page1
-import EasyML_Page2
-import EasyML_Page3
-import EasyML_Page4
-import EasyML_Page5
-import EasyML_Page6
-import EasyML_Page7
-import EasyML_Page8
-import EasyML_Page9
-import EasyML_Page10
-import EasyML_Page11
-import Index_Page
-import EasyML_Page12
-import EasyML_Page13
-import EasyML_Page14
-from flask import Flask
-
+from Pages import EasyML_Page1
+from Pages import EasyML_Page2
+from Pages import EasyML_Page3
+from Pages import EasyML_Page4
+from Pages import EasyML_Page5
+from Pages import EasyML_Page6
+from Pages import EasyML_Page7
+from Pages import EasyML_Page8
+from Pages import EasyML_Page9
+from Pages import EasyML_Page10
+from Pages import EasyML_Page11
+from Pages import Index_Page
+from Pages import EasyML_Page12
+from Pages import EasyML_Page13
+from Pages import EasyML_Page14
 
 colors = {
     'background': '#111111',
