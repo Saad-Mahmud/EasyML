@@ -13,6 +13,16 @@ from pandasql import PandaSQL
 pdsql = PandaSQL()
 
 layout = html.Div([
+    html.H3
+        (
+            children='Dataframe Editor (SQL)',
+            style={
+                'textAlign': 'center',
+                'color': 'white',
+                'font-size': '40px',
+                'background': 'royalblue'
+            }
+        ),
     dcc.Upload(
         id='page12_upload-data1',
         children=html.Div([
@@ -51,9 +61,22 @@ layout = html.Div([
         # Allow multiple files to be uploaded
         multiple=True
     ),
-    html.Button("Generate/Refresh table", id="page12_btn"),
-    html.Button("Download table", id="page12_btn2"),
-    html.Button("Run Query", id="page12_btn3"),
+    html.Button("Download table", id="page12_btn2", style={
+        'background-color': '#7386D5',
+        'border': '1%',
+        'color': 'white',
+        'font-size': '90%',
+        'margin-left': '0.75%',
+        'margin-right': '1%',
+        'font-family': 'Helvetica'
+    }),
+    html.Button("Run Query", id="page12_btn3", style={
+        'background-color': '#7386D5',
+        'border': '1%',
+        'color': 'white',
+        'font-size': '90%',
+        'font-family': 'Helvetica'
+    }),
     dcc.Input(id='page12_queryBox', placeholder='Place query here...', type='text', style={
         'width': '100%', 'margin-top': '2%', 'margin-bottom': '2%'}),
     html.H5('', id='page12_downLink'),

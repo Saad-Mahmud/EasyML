@@ -8,6 +8,22 @@
         <title>Collapsible sidebar using Bootstrap 3</title>
         <style type="text/css">
            body { background: white !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+            ::-webkit-scrollbar
+        {
+            width: 5%;
+        }
+        ::-webkit-scrollbar-track
+        {
+            background: black;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+            background: grey;
+        }
+        ::-webkit-scrollbar-thumb:hover
+        {
+            background: grey;
+        }
         </style>
 
          <!-- Bootstrap CSS CDN -->
@@ -42,7 +58,7 @@
 
             <!-- Sidebar Holder -->
             <nav id="sidebar" style="position: fixed; top:10%; width: 100%;
-            height: 100%; left: 0%">
+            height: 100%; left: 0%; overflow: auto;">
                 <div class="sidebar-header">
                     <h3>Menu</h3>
                     <strong>BS</strong>
@@ -87,6 +103,8 @@
                                 <li><a href="/page10">SVM</a></li>
                                 <li><a href="/page13">Adaboost</a></li>
                                 <li><a href="/page14">Voting Classifier</a></li>
+                                <li><a href="#"></a></li>
+                                <li><a href="#"></a></li>
                             </ul>
                     </li>
                 </ul>
