@@ -101,13 +101,13 @@
         }
         function goRight()
         {
-            page=(page%16)+1;
+            page=(page%15)+1;
             replaceAlgos(page);
         }
         function goLeft()
         {
             page--;
-            if(page<=0)page=16;
+            if(page<=0)page=15;
             replaceAlgos(page);
         }
         function replaceAlgos(a)
@@ -179,18 +179,13 @@
             }
             else if(a==14)
             {
-                discussionPage='/discussions/votingclassifier';
+                discussionPage='/discussions/univariatefeature';
                 visualizingPage='/page14'
             }
             else if(a==15)
             {
-                discussionPage='/discussions/univariatefeature';
-                visualizingPage='/page15'
-            }
-            else if(a==16)
-            {
                 discussionPage='/discussions/variancethreshold';
-                visualizingPage='/page16'
+                visualizingPage='/page15'
             }
         }
 	</script>
@@ -288,18 +283,13 @@
     </div>
 
       <div href="test" class="item">
-        <img src="/static/Images/bg2bottlegreen.jpg" style="height: 100%; width: 100%;">
-        <a href="/page14" class="algoName" style="left: 25%; top: 21%">VOTING CLASSIFIER</a>
-    </div>
-
-      <div href="test" class="item">
         <img src="/static/Images/bg2brown.jpg" style="height: 100%; width: 100%;">
-        <a href="/page15" class="algoName" style="left: 9.5%; top: 21%">UNIVARIATE FEATURE SELECTION</a>
+        <a href="/page14" class="algoName" style="left: 9.5%; top: 21%">UNIVARIATE FEATURE SELECTION</a>
     </div>
 
       <div href="test" class="item">
         <img src="/static/Images/bg2black.jpg" style="height: 100%; width: 100%;">
-        <a href="/page16" class="algoName" style="left: 23%; top: 21%">VARIANCE THRESHOLD</a>
+        <a href="/page15" class="algoName" style="left: 23%; top: 21%">VARIANCE THRESHOLD</a>
     </div>
 
   </div>

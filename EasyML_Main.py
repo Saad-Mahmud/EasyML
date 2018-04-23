@@ -17,7 +17,6 @@ from Pages import EasyML_Page11
 from Pages import Index_Page
 from Pages import EasyML_Page12
 from Pages import EasyML_Page13
-from Pages import EasyML_Page14
 
 colors = {
     'background': '#111111',
@@ -72,8 +71,6 @@ def display_page(pathname):
         return EasyML_Page12.layout
     elif (pathname == '/test/page13'):
         return EasyML_Page13.layout
-    elif (pathname == '/test/page14'):
-        return EasyML_Page14.layout
     else:
         return Index_Page.layout
 

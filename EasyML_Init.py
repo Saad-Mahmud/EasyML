@@ -87,9 +87,6 @@ def bstest14():
     return render_template('Page14_HTML.html')
 
 
-@EM_Server.route('/page15')
-def bstest15():
-    return render_template('Page15_HTML.html')
 
 
 @EM_Server.route('/')
