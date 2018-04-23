@@ -7,7 +7,7 @@ from time import time
 import plotly.graph_objs as go
 import numpy as np
 import pandas as pd
-
+#asd
 def algo(es,dp,ms,mx):
     print('{} {} {}'.format(es,dp,ms,mx))
     maindata=copy.deepcopy(EasyML_Page8.util.maindata)
