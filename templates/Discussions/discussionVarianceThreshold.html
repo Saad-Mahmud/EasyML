@@ -110,15 +110,14 @@
         }
         ::-webkit-scrollbar-thumb
         {
-            background: dodgerblue;
+            background: royalblue;
         }
         ::-webkit-scrollbar-thumb:hover
         {
             background: royalblue;
         }
 	</style>
-
-     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 
     <script>
     var config =
@@ -185,7 +184,8 @@
             }
         }
 
-         firebase.database().ref('/CommentSectionThreshold/').once('value').then(function(datasnapshot)
+
+          firebase.database().ref('/CommentSectionVoting/').once('value').then(function(datasnapshot)
         {
             var comments= datasnapshot.val();
             for(var key in comments)
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionThreshold").push().set(
+                             firebaseRef.child("CommentSectionVoting").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
@@ -238,16 +238,12 @@
                              clickButton(3);
                              return true;
                          }
-
                      }
                  }
-
-                 alert('Please register first before commenting or your Password do not match');
+                 alert('Please register first before commenting or check your password.');
                  return false;
-
              });
         }
-
         function checkEmailValidation(a)
         {
             var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -261,7 +257,7 @@
             var mail = document.getElementById("mailInput").value;
             var pass = document.getElementById("passwordInput").value;
             var req = document.getElementById("commentInput").value;
-            if(mail=="" || req=="" || pass=="")
+             if(mail=="" || req=="" || pass=="")
             {
                 alert("Please enter your name, e-mail address and request.");
                 return;
@@ -280,7 +276,7 @@
 
             }
             var showing = mail+": ";
-            var span = document.createElement("sdfdas f");
+            var span = document.createElement("sdfdasf");
             span.style.color="dodgerblue";
             span.appendChild(document.createTextNode(showing));
             document.getElementById("upperComments").appendChild(span);
@@ -290,10 +286,9 @@
 
         }
 
-
 	</script>
 </head>
-<body background="/static/Images/bg2black.jpg" style="position: fixed">
+<body background="/static/Images/bg2bottlegreen.jpg" style="position: fixed">
 
     <div style="position:fixed; top: 0%; left: 0%; width: 100%; height: 15%; background: black">
         <a href="../../" style="color: royalblue; text-decoration: none; font-family: Ubuntu;
@@ -304,7 +299,6 @@
         <a href="../signup" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 19.5%">Sign Up</a>
         <a href="../aboutUs" class="topButton" style="text-decoration: none; font-family: Ubuntu; margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%; left: 26.2%">About Us</a>
     </div>
-
 
     <button id="howTo" onclick="clickButton(1)" class="buttonClicked" style="position: fixed; top: 21.15%; left: 22%; width: 18.7%">How To Use</button>
     <button id="theory" onclick="clickButton(2)" class="eachButton" style="position: fixed; top: 21.15%; left: 44%; width: 18.7%">Theory</button>
@@ -336,20 +330,23 @@
                 border: 3px solid black;top: 29%; left: 2%; border-color: black; overflow: auto; padding: 5px;
                  width: 95%; height: 57%; visibility: hidden;">
 
-        <a href="https://en.wikipedia.org/wiki/Otsu%27s_method" style="font-size: 150%;">Variance Threshold</a>
-        <p>
-            In computer vision and image processing, Otsu's method, named after Nobuyuki Otsu
-            (大津展之 Ōtsu Nobuyuki), is used to automatically perform clustering-based image thresholding,
-            or, the reduction of a graylevel image to a binary image. The algorithm assumes that the image
-            contains two classes of pixels following bi-modal histogram (foreground pixels and background
-            pixels), it then calculates the optimum threshold separating the two classes so that their
-            combined spread (intra-class variance) is minimal, or equivalently (because the sum of pairwise
-            squared distances is constant), so that their inter-class variance is maximal. Consequently,
-            Otsu's method is roughly a one-dimensional, discrete analog of Fisher's Discriminant Analysis.
-            Otsu's method is also directly related to the Jenks optimization method.<br>
-            The extension of the original method to multi-level thresholding is referred to as the multi
-            Otsu method.<br>
+        <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm" style="font-size: 150%;">Voting Classifier</a>
+        <p>The Boyer–Moore majority vote algorithm is an algorithm for finding the majority of a
+            sequence of elements using linear time and constant space. It is named after Robert S. Boyer
+            and J Strother Moore, who published it in 1981, and is a prototypical example of a streaming
+            algorithm.<br>
+            In its simplest form, the algorithm finds a majority element, if there is one: that is,
+            an element that occurs repeatedly for more than half of the elements of the input. However,
+            if there is no majority, the algorithm will not detect that fact, and will still output one of
+            the elements. A version of the algorithm that makes a second pass through the data can be used
+            to verify that the element found in the first pass really is a majority.<br>
+            The algorithm will not, in general, find the mode of a sequence (an element that has the most
+            repetitions) unless the number of repetitions is large enough for the mode to be a majority. It
+            is not possible for a streaming algorithm to find the most frequent element in less than linear
+            space, when the number of repetitions can be small.<br>
         </p>
+
+
     </div>
 
      <div id="upperComments" style="white-space: pre-wrap; border-width: 3px; border-radius: 7px; font-family: Ubuntu; font-size: 18px; position: fixed;
@@ -359,7 +356,7 @@
 
     <p id="title" style="visibility: hidden;">Comments:-</p>
 
-      <input style="left: 2%; position: fixed; top:68.5%; height: 4.5%; width: 95%; font-family: Ubuntu; font-size: 15px; border-width: 3px; border-radius: 7px; border: 3px solid black; border-color: black; visibility: hidden" type="email" id="mailInput" placeholder=" Enter e-mail address...">
+    <input style="left: 2%; position: fixed; top:68.5%; height: 4.5%; width: 95%; font-family: Ubuntu; font-size: 15px; border-width: 3px; border-radius: 7px; border: 3px solid black; border-color: black; visibility: hidden" type="email" id="mailInput" placeholder=" Enter e-mail address...">
     <input style="left:2%; position: fixed; top:75%; height: 4.5%; width: 95%; font-family: Ubuntu; font-size: 15px; border-width: 3px; border-radius: 7px; border: 3px solid black; border-color: black; visibility: hidden" type="password" id="passwordInput" placeholder=" Enter password...">
     <textarea style="left:2%; position: fixed; top:81.5%; height: 4.5%; width: 95%; font-family: Ubuntu; font-size: 15px; border-width: 3px; border-radius: 7px; border: 3px solid black; border-color: black; visibility: hidden" id="commentInput" placeholder=" Enter comment..."></textarea>
     <button id="submitButton" class="submitButtonClass" onclick="addComment()" style="visibility: hidden;">Submit</button>
@@ -367,7 +364,8 @@
     <img id="loading" , src="/static/Images/loading6.gif" ,
          style="position:fixed; left:38%; top:35%; height: 50%; width: 22%; visibility: hidden;">
 
-    <p id="bottomText3" align="center">_________________________________________________________________________________________________________________________________________________________
+    <p id="bottomText3" align="center">
+        _________________________________________________________________________________________________________________________________________________________
     </p>
     <p id="bottomText2" align="center">EasyML is a free-to-use tool for data analysis and visualizing data using various Machine Learning algorithms.</p>
     <p id="bottomText1" align="center">We own none of the photos and logos used here.</p>
