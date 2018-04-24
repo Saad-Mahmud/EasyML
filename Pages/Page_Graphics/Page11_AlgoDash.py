@@ -3,7 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from EasyML_Init import EM_App
 from Pages import EasyML_Page11
-from Pages import Page11_Ranker
+from Pages.Page_Graphics import Page11_Ranker
 
 
 def Page11_Butto_Init():
