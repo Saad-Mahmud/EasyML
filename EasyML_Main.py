@@ -14,7 +14,7 @@ from Pages import EasyML_Page8
 from Pages import EasyML_Page9
 from Pages import EasyML_Page10
 from Pages import EasyML_Page11
-from Pages import Index_Page
+from Pages.Page_Index import Index_Page
 from Pages import EasyML_Page12
 from Pages import EasyML_Page13
 
