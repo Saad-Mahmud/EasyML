@@ -1,12 +1,11 @@
-from Pages import EasyML_Page9
-from DataProcessor import dtf
+from Pages.Page_Main import EasyML_Page9
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 import copy
 from time import time
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
+
 
 def algo(hls,itr,alp,lri,lrm,ac,sol):
     print('{} {} {} {} {} {} {}'.format(hls,itr,alp,lri,lrm,ac,sol))
@@ -20,7 +19,7 @@ def algo(hls,itr,alp,lri,lrm,ac,sol):
     Ac=dt.score(X_test, y_test)
     Tm=time()-t0
     EasyML_Page9.util.Xs.append(hls)
-    EasyML_Page9.util.Ys.append(Ac*100)
+    EasyML_Page9.util.Ys.append(Ac * 100)
     EasyML_Page9.util.Texts.append(
         "Time = {}, M_itr = {} , alph = {}, learing_rate = {}, activtor = {}, solver = {}".format(Tm,itr,alp,lri,ac,sol))
     print('done')
