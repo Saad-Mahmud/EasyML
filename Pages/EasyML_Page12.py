@@ -183,8 +183,7 @@ def page12_runQuery(n_clicks, value):
             print(st.a.tab3)
             st.final.clk=n_clicks
             return html.Div([
-                html.H1(''),
-                html.H5('New Table'),
+                html.H5('New Table', style={'margin-top':'5%'}),
                 dt.DataTable(rows=st.a.tab3.to_dict('records'),
                              row_selectable=True, filterable=True, sortable=True, selected_row_indices=[], ),
                 html.Hr()
@@ -195,5 +194,4 @@ def page12_runQuery(n_clicks, value):
             parse1 = parse[1].split("[")
             print(parse1[0])
             return html.Div([
-                html.H1(''),
-                html.H4(str(parse1[0]))])
+                html.H4(str(parse1[0]))], style={'margin-top': '5%'})

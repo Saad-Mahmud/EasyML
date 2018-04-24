@@ -1,5 +1,4 @@
 import base64
-import datetime
 import io
 from time import time
 import dash
@@ -18,7 +17,7 @@ from sklearn.manifold import MDS
 from sklearn.manifold import SpectralEmbedding as SE
 from sklearn.preprocessing import StandardScaler
 from EasyML_Init import EM_App
-from Pages import Page1_Util
+from Pages.Page_UTIL import Page1_Util
 
 ''' Color for Background'''
 
@@ -286,7 +285,7 @@ def update_graph(algo_name, text_type,clk):
     if(algo_name == None): return Page1_Util.a.graph
     if (text_type == None): return Page1_Util.a.graph
     if(clk==None):return Page1_Util.a.graph
-    if(clk<=Page1_Util.a.nlcik): return Page1_Util.a.graph
+    if(clk<= Page1_Util.a.nlcik): return Page1_Util.a.graph
 
     print(clk)
     Page1_Util.a.nlcik=clk
