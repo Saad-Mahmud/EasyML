@@ -23,7 +23,8 @@ EM_App.css.append_css(
     {'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'}
 )
 
-@EM_Server.route('/tt')
+#test
+@EM_Server.route('/demo')
 def bstest():
     return render_template('index4.html')
 
