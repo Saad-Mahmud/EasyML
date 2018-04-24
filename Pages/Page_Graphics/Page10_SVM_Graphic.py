@@ -1,14 +1,10 @@
-from Pages import EasyML_Page10
-from DataProcessor import dtf
+from Pages.Page_Main import EasyML_Page10
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 import copy
 from time import time
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
-
-
 
 
 def algo(c,ga,de,ke,da):
@@ -28,7 +24,7 @@ def algo(c,ga,de,ke,da):
     Ac=dt.score(X_test, y_test)
     Tm=time()-t0
     EasyML_Page10.util.Xs.append(c)
-    EasyML_Page10.util.Ys.append(Ac*100)
+    EasyML_Page10.util.Ys.append(Ac * 100)
     EasyML_Page10.util.Texts.append(
         "Time = {}, C = {} , Gamma = {}, Kernel = {}, Degree = {}, Data = {}".format(Tm,c,ga,ke,de,da))
     print('done')

@@ -4,8 +4,7 @@ import dash_html_components as html
 import dash_table_experiments as dt
 from EasyML_Init import EM_App
 from Pages.Page_Main import EasyML_Page1, EasyML_Page2, EasyML_Page3, EasyML_Page4, EasyML_Page5, EasyML_Page6, \
-    EasyML_Page7, EasyML_Page8, EasyML_Page9
-from Pages import EasyML_Page10
+    EasyML_Page7, EasyML_Page8, EasyML_Page9, EasyML_Page10
 from Pages import EasyML_Page11
 from Pages.Page_Index import Index_Page
 from Pages import EasyML_Page12
