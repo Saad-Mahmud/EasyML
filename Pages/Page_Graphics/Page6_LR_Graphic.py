@@ -1,12 +1,11 @@
-from Pages import EasyML_Page6
-from DataProcessor import dtf
+from Pages.Page_Main import EasyML_Page6
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import copy
 from time import time
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
+
 
 def algo(itr,sol,al):
     if(sol=='liblinear' and al=='multinomial'):return
@@ -19,8 +18,8 @@ def algo(itr,sol,al):
     Ac=lr.score(X_test, y_test)
     Tm=time()-t0
     EasyML_Page6.util.Xs.append(itr)
-    EasyML_Page6.util.Ys.append(Ac*100)
-    EasyML_Page6.util.Texts.append("Time = {}, Algo = {}, Solver = {}".format(Tm,al,sol))
+    EasyML_Page6.util.Ys.append(Ac * 100)
+    EasyML_Page6.util.Texts.append("Time = {}, Algo = {}, Solver = {}".format(Tm, al, sol))
     print('done')
 
 def graphic():
