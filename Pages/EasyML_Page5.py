@@ -1,16 +1,7 @@
-from DataProcessor import dtf
-from Pages import Page5_Util as putil
-import base64
-import datetime
-import io
-import dash
+from Pages.Page_UTIL import Page5_Util as putil
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
 from EasyML_Init import EM_App
 
 colors = {
