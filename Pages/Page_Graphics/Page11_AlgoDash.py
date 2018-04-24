@@ -2,7 +2,7 @@ from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 from EasyML_Init import EM_App
-from Pages import EasyML_Page11
+from Pages.Page_Main import EasyML_Page11
 from Pages.Page_Graphics import Page11_Ranker
 
 

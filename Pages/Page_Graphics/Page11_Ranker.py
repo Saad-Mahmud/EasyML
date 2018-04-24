@@ -1,18 +1,11 @@
-from Pages import EasyML_Page11
+from Pages.Page_Main import EasyML_Page11
 from sklearn.feature_selection import RFE
-from DataProcessor import dtf
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 import copy
 import dash_html_components as html
 import dash_core_components as dcc
-from time import time
 from sklearn.svm import SVC
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
 import urllib.parse
-import dash
 from dash.dependencies import Input, Output
 from EasyML_Init import EM_App
 
@@ -25,7 +18,7 @@ def LRAlgo(itr,sol,al):
     rfe = rfe.fit(maindata.X,maindata.Y)
     print(rfe.ranking_)
     EasyML_Page11.util.RankofF=[]
-    EasyML_Page11.util.RankofF=[(maindata.features[i],rfe.ranking_[i])for  i in range(maindata.N_features)]
+    EasyML_Page11.util.RankofF=[(maindata.features[i], rfe.ranking_[i]) for i in range(maindata.N_features)]
     EasyML_Page11.util.RankofF=sorted(EasyML_Page11.util.RankofF, key=lambda rf: rf[1])
     print(EasyML_Page11.util.RankofF)
     print('done')
@@ -44,7 +37,7 @@ def SVMAlgo(c,g,d,k,dp):
     rfe = rfe.fit(maindata.X,maindata.Y)
     print(rfe.ranking_)
     EasyML_Page11.util.RankofF=[]
-    EasyML_Page11.util.RankofF=[(maindata.features[i],rfe.ranking_[i])for  i in range(maindata.N_features)]
+    EasyML_Page11.util.RankofF=[(maindata.features[i], rfe.ranking_[i]) for i in range(maindata.N_features)]
     EasyML_Page11.util.RankofF=sorted(EasyML_Page11.util.RankofF, key=lambda rf: rf[1])
     print(EasyML_Page11.util.RankofF)
     print('done')

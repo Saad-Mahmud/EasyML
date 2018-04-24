@@ -5,7 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_table_experiments as dt
 from EasyML_Init import EM_App
-from Pages import EasyML_Page11
+from Pages.Page_Main import EasyML_Page11
 from Pages.Page_Graphics import Page11_AlgoDash
 
 
@@ -141,7 +141,7 @@ def update_ui(name,lab,click):
             'color': 'red'
         })]
     elif(lab==None):
-        if(click!=None):EasyML_Page11.util.N_Click_bt1 = click
+        if(click!=None): EasyML_Page11.util.N_Click_bt1 = click
         return [html.P("---------------- Select a Label---------------",
                        style={
                            'font-size': '15px',
@@ -153,7 +153,7 @@ def update_ui(name,lab,click):
                            'font-size': '15px',
                            'font-color': 'red'
                        })]
-    elif (click<=EasyML_Page11.util.N_Click_bt1):
+    elif (click <= EasyML_Page11.util.N_Click_bt1):
         return html.Div([])
     else:
         EasyML_Page11.util.N_Click_bt1=click
