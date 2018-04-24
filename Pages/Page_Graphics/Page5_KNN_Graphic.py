@@ -1,12 +1,11 @@
-from Pages import EasyML_Page5
-from DataProcessor import dtf
+from Pages.Page_Main import EasyML_Page5
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import copy
 from time import time
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
+
 
 def algo(Kn,Wg,Al,Dm):
     print('{} {} {} {}'.format(Kn,Wg,Al,Dm))
@@ -18,8 +17,8 @@ def algo(Kn,Wg,Al,Dm):
     Ac=knn.score(X_test, y_test)
     Tm=time()-t0
     EasyML_Page5.util.Xs.append(Kn)
-    EasyML_Page5.util.Ys.append(Ac*100)
-    EasyML_Page5.util.Texts.append("Time = {}, Algo = {}, Distance = {}, Weight={}".format(Tm,Al,Dm,Wg))
+    EasyML_Page5.util.Ys.append(Ac * 100)
+    EasyML_Page5.util.Texts.append("Time = {}, Algo = {}, Distance = {}, Weight={}".format(Tm, Al, Dm, Wg))
     print('done')
 
 def graphic():
