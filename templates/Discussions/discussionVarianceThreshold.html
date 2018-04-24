@@ -185,7 +185,7 @@
             }
         }
 
-         firebase.database().ref('/CommentSectionDataVisualize/').once('value').then(function(datasnapshot)
+         firebase.database().ref('/CommentSectionThreshold/').once('value').then(function(datasnapshot)
         {
             var comments= datasnapshot.val();
             for(var key in comments)
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionDataVisualize").push().set(
+                             firebaseRef.child("CommentSectionThreshold").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
