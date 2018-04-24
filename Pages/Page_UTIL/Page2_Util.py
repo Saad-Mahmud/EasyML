@@ -1,18 +1,12 @@
 from DataProcessor import dtf
-import base64
-import datetime
-import io
-import dash
 from dash.dependencies import Input, Output,State
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table_experiments as dt
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
 from EasyML_Init import EM_App
 from Pages import EasyML_Page2 as EP
-from Pages import Page2_Tabs_Layout as P2TL
+from Pages.Page_Graphics import Page2_Tabs_Layout as P2TL
+
 
 class putil():
 
