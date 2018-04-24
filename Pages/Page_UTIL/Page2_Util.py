@@ -1,4 +1,4 @@
-from DataProcessor import dtf
+from DataProcessor import DataFrame
 from dash.dependencies import Input, Output,State
 import dash_core_components as dcc
 import dash_html_components as html
@@ -160,7 +160,7 @@ class putil():
 
             print("{} {} {}".format(names, dates, contents))
             self.isNone = False
-            self.maindata=dtf.dtf(contents, names, dates)
+            self.maindata=DataFrame.dtf(contents, names, dates)
             self.Bt_Tab2 = 0
             self.Bt_Delrows = 0
             self.Bt_Delcols = 0

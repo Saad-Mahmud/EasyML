@@ -1,4 +1,4 @@
-from DataProcessor import dtf
+from DataProcessor import DataFrame
 import dash
 from dash.dependencies import Output
 import dash_core_components as dcc
@@ -106,7 +106,7 @@ class putil():
             self.isNone=True
         else:
             self.isNone = False
-            self.maindata=dtf.dtf(contents, names, dates)
+            self.maindata=DataFrame.dtf(contents, names, dates)
             self.N_Click_bt1=0
             self.N_Click_LR = 0
             self.N_Click_SVM = 0

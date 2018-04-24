@@ -1,5 +1,5 @@
 
-from DataProcessor import dtf
+from DataProcessor import DataFrame
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
