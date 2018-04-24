@@ -5,7 +5,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_table_experiments as dt
 from EasyML_Init import EM_App
-from Pages import EasyML_Page13
+from Pages.Page_Main import EasyML_Page13
 from Pages.Page_Graphics import Page13_AB_Graphic
 
 
@@ -279,7 +279,7 @@ def update_ui(name,click):
                            'font-size': '15px',
                            'font-color': 'red'
                        })]
-    elif (click<=EasyML_Page13.util.N_Click_bt1):
+    elif (click <= EasyML_Page13.util.N_Click_bt1):
         return html.Div([])
     else:
         EasyML_Page13.util.N_Click_bt1=click
