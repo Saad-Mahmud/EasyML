@@ -6,7 +6,7 @@ import dash_table_experiments as dt
 from dash.dependencies import Input, Output
 import pandas as pd
 import copy
-from Pages import Static as st
+from Pages.Page_UTIL import Static as st
 from EasyML_Init import EM_App as app
 from pandasql import PandaSQL
 
