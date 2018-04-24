@@ -1,13 +1,10 @@
-from Pages import EasyML_Page8
-from DataProcessor import dtf
+from Pages.Page_Main import EasyML_Page8
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import copy
 from time import time
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
-
 
 
 def algo(es,dp,ms,mx):
@@ -20,8 +17,8 @@ def algo(es,dp,ms,mx):
     Ac=dt.score(X_test, y_test)
     Tm=time()-t0
     EasyML_Page8.util.Xs.append(es)
-    EasyML_Page8.util.Ys.append(Ac*100)
-    EasyML_Page8.util.Texts.append("Time = {}, Mx_Depth = {} , min_sample_split = {}, max_features = {}".format(Tm,dp,ms,mx))
+    EasyML_Page8.util.Ys.append(Ac * 100)
+    EasyML_Page8.util.Texts.append("Time = {}, Mx_Depth = {} , min_sample_split = {}, max_features = {}".format(Tm, dp, ms, mx))
     print('done')
 
 def graphic():
