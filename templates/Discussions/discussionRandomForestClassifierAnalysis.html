@@ -185,7 +185,7 @@
         }
 
 
-          firebase.database().ref('/CommentSectionRandomForest/').once('value').then(function(datasnapshot)
+          firebase.database().ref('/CommentSectionRecursiveFeature/').once('value').then(function(datasnapshot)
         {
             var comments= datasnapshot.val();
             for(var key in comments)
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionRandomForest).push().set(
+                             firebaseRef.child("CommentSectionRecursiveFeature").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
@@ -288,7 +288,7 @@
 
 	</script>
 </head>
-<body background="/static/Images/bg2red.jpg" style="position: fixed">
+<body background="/static/Images/bg2black.jpg" style="position: fixed">
 
     <div style="position:fixed; top: 0%; left: 0%; width: 100%; height: 15%; background: black">
         <a href="../../" style="color: royalblue; text-decoration: none; font-family: Ubuntu;
@@ -330,28 +330,44 @@
                 border: 3px solid black;top: 29%; left: 2%; border-color: black; overflow: auto; padding: 5px;
                  width: 95%; height: 57%; visibility: hidden;">
 
-        <a href="https://en.wikipedia.org/wiki/Random_forest" style="font-size: 150%;">Random Forest</a>
+        <a href="https://en.wikipedia.org/wiki/Feature_selection" style="font-size: 150%;">Recursive Feature</a>
         <p>
-            Random forests or random decision forests are an ensemble learning method for classification,
-            regression and other tasks, that operate by constructing a multitude of decision trees at training
-            time and outputting the class that is the mode of the classes (classification) or mean prediction
-            (regression) of the individual trees. Random decision forests correct for decision trees' habit
-            of overfitting to their training set.<br>
-            The first algorithm for random decision forests was created by Tin Kam Ho using the random
-            subspace method, which, in Ho's formulation, is a way to implement the "stochastic discrimination"
-            approach to classification proposed by Eugene Kleinberg.<br>
-            An extension of the algorithm was developed by Leo Breiman and Adele Cutler, and "Random Forests"
-            is their trademark. The extension combines Breiman's "bagging" idea and random selection of
-            features, introduced first by Ho and later independently by Amit and Geman in order to construct
-            a collection of decision trees with controlled variance.<br>
+            In machine learning and statistics, feature selection, also known as variable selection,
+            attribute selection or variable subset selection, is the process of selecting a subset of
+            relevant features (variables, predictors) for use in model construction. Feature selection
+            techniques are used for four reasons:<br>
+            simplification of models to make them easier to interpret by researchers/users,<br>
+            shorter training times,<br>
+            to avoid the curse of dimensionality,<br>
+            enhanced generalization by reducing overfitting (formally, reduction of variance)<br>
+            The central premise when using a feature selection technique is that the data contains
+            many features that are either redundant or irrelevant, and can thus be removed without
+            incurring much loss of information. Redundant or irrelevant features are two distinct
+            notions, since one relevant feature may be redundant in the presence of another relevant
+            feature with which it is strongly correlated.<br>
+            Feature selection techniques should be distinguished from feature extraction. Feature
+            extraction creates new features from functions of the original features, whereas feature
+            selection returns a subset of the features. Feature selection techniques are often used in
+            domains where there are many features and comparatively few samples (or data points).
+            Archetypal cases for the application of feature selection include the analysis of written texts
+            and DNA microarray data, where there are many thousands of features, and a few tens to hundreds
+            of samples.<br>
         </p>
         <p style="font-size: 150%">Pseudo code:-</p>
         <p>
-            1. Randomly select “K” features from total “m” features where k << m<br>
-            2. Among the “K” features, calculate the node “d” using the best split point<br>
-            3. Split the node into daughter nodes using the best split<br>
-            4. Repeat the a to c steps until “l” number of nodes has been reached<br>
-            5. Build forest by repeating steps a to d for “n” number times to create “n” number of trees<br>
+            1. Tune/train the model on the training set using all predictors.<br>
+            2. Calculate model performance.<br>
+            3. Calculate variable importance or rankings.<br>
+            4. for Each subset size Si, i=1...S do<br>
+            5. Keep the Si most important variables.<br>
+            6. [Optional] Pre-process the data.<br>
+            7. Tune/train the model on the training set using Si predictors.<br>
+            8. Calculate model performance.<br>
+            9. [Optional] Recalculate the rankings for each predictor.<br>
+            10. end<br>
+            11. Calculate the performance profile over the Si.<br>
+            12. Determine the appropriate number of predictors.<br>
+            13. Use the model corresponding to the optimal Si.<br>
         </p>
 
 
