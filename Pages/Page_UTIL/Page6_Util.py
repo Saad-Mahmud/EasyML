@@ -6,7 +6,7 @@ import dash_html_components as html
 import dash_table_experiments as dt
 from EasyML_Init import EM_App
 from Pages import EasyML_Page6
-from Pages import Page6_LR_Graphic
+from Pages.Page_Graphics import Page6_LR_Graphic
 
 
 class putil():
