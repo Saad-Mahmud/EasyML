@@ -20,7 +20,7 @@ from sklearn.preprocessing import StandardScaler
 from EasyML_Init import EM_App
 from Pages import Page1_Util
 
-
+''' Color for Background'''
 
 colors = {
     'background': '#111111',
@@ -28,9 +28,14 @@ colors = {
     'text2': '#000000'
 }
 
+
+'''Page One Layout'''
+
 layout=html.Div([
+
     html.Div([
 
+        #Title
         html.Div([
             html.H3
                 (
@@ -42,6 +47,7 @@ layout=html.Div([
                         'background':'#6d7fcc'
                     }
                 ),
+            #Page CSV
             dcc.Upload
                 (
                     id='Page1_upload-data',
@@ -63,6 +69,7 @@ layout=html.Div([
                 # Allow multiple files to be uploaded
                 multiple=False
             ),
+            #Page Main Layout
             html.Div(id='Page1_output-data-upload'),
             dcc.Interval(
                 id='Page1_interval-component',
@@ -84,8 +91,13 @@ layout=html.Div([
         'top':'20px',
     }),
 ])
+
+'''Data Frame'''
 page1df = pd.DataFrame()
+'''Algo Time'''
 timeneede=0.0
+
+'''Parse_CSV'''
 def parse_contents(contents, filename, date):
     content_type, content_string = contents.split(',')
 
@@ -206,6 +218,7 @@ def parse_contents(contents, filename, date):
         # For debugging, display the raw contents provided by the web browser
     ])
 
+'''Gen Data'''
 
 @EM_App.callback(Output('Page1_output-data-upload', 'children'),
               [Input('Page1_upload-data', 'contents'),
@@ -262,13 +275,14 @@ def dr_maker(algo):
     #print('\n\n')
     return finalDf
 
+#Graph
 @EM_App.callback(
     dash.dependencies.Output('Page1_indicator-graphic', 'figure'),
     [dash.dependencies.Input('Page1_algorithm', 'value'),
      dash.dependencies.Input('Page1_marker_text', 'value'),
      dash.dependencies.Input('Page1_Bt_Apply', 'n_clicks')])
 def update_graph(algo_name, text_type,clk):
-
+    #init Button
     if(algo_name == None): return Page1_Util.a.graph
     if (text_type == None): return Page1_Util.a.graph
     if(clk==None):return Page1_Util.a.graph
@@ -288,6 +302,7 @@ def update_graph(algo_name, text_type,clk):
     diflisty = []
     diflistt = []
 
+    #Color
     colo=['#bcbd22','#7f7f7f','#e377c2','#1f77b4','#ff7f0e','#2ca02c','#d62728','#17becf','#9467bd','#8c564b']
     for i in range(len(unitag)):
         tmpx=[]

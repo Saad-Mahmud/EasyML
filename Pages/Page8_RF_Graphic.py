@@ -7,9 +7,11 @@ from time import time
 import plotly.graph_objs as go
 import numpy as np
 import pandas as pd
-#asd
+
+
+
 def algo(es,dp,ms,mx):
-    print('{} {} {}'.format(es,dp,ms,mx))
+    print('Debug: {} {} {}'.format(es,dp,ms,mx))
     maindata=copy.deepcopy(EasyML_Page8.util.maindata)
     X_train, X_test, y_train, y_test = train_test_split(maindata.X, maindata.Y, stratify=maindata.Y,random_state=42)
     dt = RandomForestClassifier(n_estimators=es,max_depth=dp,min_samples_split=ms,max_features=mx,random_state=0)
