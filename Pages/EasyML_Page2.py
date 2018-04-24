@@ -1,18 +1,9 @@
-import base64
-import datetime
-import io
-
-import dash
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_table_experiments as dt
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
 
 from EasyML_Init import EM_App
-from Pages import Page2_Util
+from Pages.Page_UTIL import Page2_Util
 
 colors = {
     'background': '#111111',
@@ -20,7 +11,7 @@ colors = {
     'text2': '#000000'
 }
 
-util=Page2_Util.putil()
+util= Page2_Util.putil()
 
 layout = html.Div([
     html.Div([
@@ -82,7 +73,7 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
     if list_of_contents is not None:
         #print("{} {} {}".format(list_of_names,list_of_dates,list_of_contents))
         global util
-        util=Page2_Util.putil(list_of_contents, list_of_names, list_of_dates)
+        util= Page2_Util.putil(list_of_contents, list_of_names, list_of_dates)
         children = [util.page_contents()]
         return children
     else:
