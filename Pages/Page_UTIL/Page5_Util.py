@@ -1,18 +1,13 @@
 from DataProcessor import dtf
-import base64
-import datetime
-import io
 import dash
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table_experiments as dt
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
 from EasyML_Init import EM_App
 from Pages import EasyML_Page5
-from Pages import Page5_KNN_Graphic
+from Pages.Page_Graphics import Page5_KNN_Graphic
+
 
 class putil():
 
