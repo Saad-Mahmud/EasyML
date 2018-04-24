@@ -13,7 +13,7 @@ colors = {
     'text2': '#000000'
 }
 
-
+#Main App layout
 EM_App.layout = html.Div([
 
     dcc.Location(id='EasyML_Main_Url', refresh=False),
