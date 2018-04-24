@@ -1,12 +1,11 @@
-from Pages import EasyML_Page7
-from DataProcessor import dtf
+from Pages.Page_Main import EasyML_Page7
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 import copy
 from time import time
 import plotly.graph_objs as go
 import numpy as np
-import pandas as pd
+
 
 def algo(dp,ms,mx):
     print('{} {} {}'.format(dp,ms,mx))
@@ -18,8 +17,8 @@ def algo(dp,ms,mx):
     Ac=dt.score(X_test, y_test)
     Tm=time()-t0
     EasyML_Page7.util.Xs.append(dp)
-    EasyML_Page7.util.Ys.append(Ac*100)
-    EasyML_Page7.util.Texts.append("Time = {}, min_sample_split = {}, max_features = {}".format(Tm,ms,mx))
+    EasyML_Page7.util.Ys.append(Ac * 100)
+    EasyML_Page7.util.Texts.append("Time = {}, min_sample_split = {}, max_features = {}".format(Tm, ms, mx))
     print('done')
 
 def graphic():

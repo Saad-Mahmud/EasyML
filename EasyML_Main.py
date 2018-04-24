@@ -3,8 +3,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_table_experiments as dt
 from EasyML_Init import EM_App
-from Pages.Page_Main import EasyML_Page1, EasyML_Page2, EasyML_Page3, EasyML_Page4, EasyML_Page5, EasyML_Page6
-from Pages import EasyML_Page7
+from Pages.Page_Main import EasyML_Page1, EasyML_Page2, EasyML_Page3, EasyML_Page4, EasyML_Page5, EasyML_Page6, \
+    EasyML_Page7
 from Pages import EasyML_Page8
 from Pages import EasyML_Page9
 from Pages import EasyML_Page10
