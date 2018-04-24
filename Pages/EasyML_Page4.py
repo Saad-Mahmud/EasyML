@@ -1,5 +1,4 @@
 import base64
-import datetime
 import io
 from time import time
 import dash
@@ -17,7 +16,7 @@ from sklearn.manifold import LocallyLinearEmbedding
 from sklearn.preprocessing import StandardScaler
 from sklearn.manifold import MDS
 from sklearn.manifold import SpectralEmbedding as SE
-from Pages import Page4_Util
+from Pages.Page_UTIL import Page4_Util
 from DataProcessor import Color
 
 from EasyML_Init import EM_App
@@ -275,7 +274,7 @@ def update_graph(algo_name, text_type,clk):
     if(algo_name == None): return Page4_Util.a.graph
     if (text_type == None): return Page4_Util.a.graph
     if(clk==None):return Page4_Util.a.graph
-    if(clk<=Page4_Util.a.nlcik): return Page4_Util.a.graph
+    if(clk<= Page4_Util.a.nlcik): return Page4_Util.a.graph
     Page4_Util.a.nlcik=clk
     df =dr_maker(algo_name,text_type)
     xx = np.array(df['principal component 1'])
