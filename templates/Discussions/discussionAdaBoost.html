@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <title>AdaBoost Discussion</title>
     <style type="text/css">
 		.topButton
         {
@@ -185,7 +185,7 @@
         }
 
 
-          firebase.database().ref('/CommentSectionAdaBoost/').once('value').then(function(datasnapshot)
+          firebase.database().ref('/CommentSectionVoting/').once('value').then(function(datasnapshot)
         {
             var comments= datasnapshot.val();
             for(var key in comments)
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionAdaBoost").push().set(
+                             firebaseRef.child("CommentSectionSVM").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
@@ -350,6 +350,19 @@
             on harder-to-classify examples.<br>
         </p>
 
+        <p style="font-size: 150%;">Pseudo-Code</p>
+        <p>
+            0) Set W˜ (0)i = 1/n for i = 1,...,n<br>
+            1) At the mth iteration we find (any) classifier h(x; ˆθm) for<br>
+            which the weighted classification error e"m<br>
+            e"m = 0.5 − 1/2(sum from i=1 to i=n, W˜ (m−1)i yih(xi; ˆθm))<br>
+            is better than chance.<br>
+            2) The new component is assigned votes based on its error:<br>
+            αˆm = 0.5 log( (1 − "m)/"m )<br>
+            3) The weights are updated according to (Zm is chosen so that
+            the new weights W˜ (m)i sum to one):<br>
+            W˜ (m)i =(1/Zm)· W˜ (m−1)i · exp{ −yiαˆmh(xi; ˆθm) }<br>
+        </p>
 
     </div>
 
