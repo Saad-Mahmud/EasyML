@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <title>Feature Selection Discussion</title>
     <style type="text/css">
 		.topButton
         {
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionFeatureSelect").push().set(
+                             firebaseRef.child("CommentSectionSVM").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
@@ -353,6 +353,26 @@
             and a few tens to hundreds of samples.<br>
         </p>
 
+        <p style="font-size: 150%;">Pseudo-Code</p>
+        <p>
+            1. Collect a training data set from the specific domain.<br>
+            2. Shuffle the data set.<br>
+            3. Break it into P partitions, (say P = 20)<br>
+            4. For each partition ( i = 0, 1, ..., P-1 )<br><br>
+            a. Let OuterTrainset(i) = all partitions except i.<br>
+            b. Let OuterTestset(i) = the i’th partition<br>
+            c. Let InnerTrain(i) = randomly chosen 70% of the OuterTrainset(i).<br>
+            d. Let InnerTest(i) = the remaining 30% of the OuterTrainset(i).<br>
+            e. For j = 0, 1, ..., m<br><br>
+            Search for the best feature set with j components, fsij.using<br>
+            leave-one-out on InnerTrain(i)<br>
+            Let InnerTestScoreij = RMS score of fsij on InnerTest(i).<br>
+            End loop of (j).<br><br>
+            f. Select the fsij with the best inner test score.<br>
+            g. Let OuterScorei = RMS score of the selected feature set on OuterTestset(i)<br>
+            End of loop of (i).<br><br>
+            5. Return the mean Outer Score.<br>
+        </p>
 
     </div>
 
