@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <title>Dimensionality Reduction 3D Discussion</title>
     <style type="text/css">
 		.topButton
         {
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionDimensionality3D").push().set(
+                             firebaseRef.child("CommentSectionSVM").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
@@ -335,6 +335,16 @@
             reduction is the process of reducing the number of random variables under consideration by
             obtaining a set of principal variables. It can be divided into feature selection and feature
             extraction</p>
+
+        <p style="font-size: 150%">Pseudo code:-</p>
+        <p>
+            1. Take the whole dataset consisting of d-dimensional samples ignoring the class labels<br>
+            2. Compute the d-dimensional mean vector (i.e., the means for every dimension of the whole dataset)<br>
+            3. Compute the scatter matrix (alternatively, the covariance matrix) of the whole data set<br>
+            4. Compute eigenvectors (ee1,ee2,...,eed) and corresponding eigenvalues (λλ1,λλ2,...,λλd) <br>
+            5. Sort the eigenvectors by decreasing eigenvalues and choose k eigenvectors with the largest eigenvalues to form a d×k dimensional matrix WW(where every column represents an eigenvector) <br>
+            6. Use this d×k eigenvector matrix to transform the samples onto the new subspace. This can be summarized by the mathematical equation: yy=WWT×xx (where xx is a d×1-dimensional vector representing one sample, and yy is the transformed k×1-dimensional sample in the new subspace.)<br>
+        </p>
 
 
     </div>
