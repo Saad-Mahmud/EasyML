@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Blog</title>
+    <style type="text/css">
+		.topButton
+        {
+            color: white;
+        }
+        .topButton:hover
+        {
+            color: royalblue;
+        }
+        .topButton:active
+        {
+            color: royalblue;
+        }
+        #bottomText1
+		{
+            position: fixed;
+            bottom: 2%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        #bottomText2
+		{
+            position: fixed;
+            bottom: 4%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        #bottomText3
+		{
+            position: fixed;
+            bottom: 6%;
+            left: 20%;
+            right: 20%;
+            font-family: "Ubuntu Light";
+            font-size: 62%;
+            color: black;
+		}
+        .eachOption
+        {
+            background: royalblue;
+            font-family: Ubuntu;
+        }
+        .eachOption:hover
+        {
+            background: white;
+            font-family: Ubuntu;
+        }
+        ::-webkit-scrollbar
+        {
+            width: 1.1%;
+        }
+        ::-webkit-scrollbar-track
+        {
+            background: lightgray;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+            background: dodgerblue;
+        }
+        ::-webkit-scrollbar-thumb:hover
+        {
+            background: royalblue;
+        }
+	</style>
+    <script type="text/javascript">
+        function showBlog(num)
+        {
+            document.getElementById("showBlog").style.visibility='visible';
+            document.getElementById("showBlog").appendChild(document.createTextNode(num+"\n"));
+        }
+	</script>
+</head>
+
+<body background="/static/Images/bg2.jpg" style="position: fixed">
+
+    <div style="position:fixed; top: 0%; left: 0%; width: 100%; height: 15%; background: black">
+        <a href=".." style="color: royalblue; text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 4.6%; position: fixed; font-size: 155%">
+            <img src="/static/Images/EasyMLLogo2.png" style="height: 13%; width: 30%">
+        </a>
+        <a href="request" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 12%">Request</a>
+        <a href="signup" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 19.5%">Sign Up</a>
+        <a href="blog" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 26.2%">Blog</a>
+        <a href="aboutUs" class="topButton" style="text-decoration: none; font-family: Ubuntu;
+         margin-left: 5.5%; margin-right: 5%; top: 5.5%; position: fixed; font-size: 115%;
+          left: 30.7%">About Us</a>
+    </div>
+
+
+    <div id="showBlog" style="white-space: pre-line; border-width: 3px;font-family: Ubuntu;
+         font-size: 130%; position: fixed; border: 3px solid black;top: 24%; left: 1.9%; border-color: black;
+         background: white;overflow: auto; padding: 5px; width: 95.1%; height: 65%; visibility: hidden;">
+    </div>
+
+    <div class="container" style="position: fixed; left: 1%; top: 17%;">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button"
+                data-toggle="dropdown" style="width: 15%; height: 5%;
+                 background: royalblue; font-family: 'Ubuntu Light';
+                 font-size: 125%; color: white">Select Dataset
+        <span class="caret"></span>
+        </button>
+        <ul class="eachOption dropdown-menu" role="menu" aria-labelledby="menu1" style="color: white; background: royalblue">
+          <li class="eachOption" role="presentation"><a role="menuitem" tabindex="-1" onclick="showBlog(1)">Iris</a></li>
+          <li class="eachOption" role="presentation"><a role="menuitem" tabindex="-1" onclick="showBlog(2)">Iris2</a></li>
+          <li class="eachOption" role="presentation"><a role="menuitem" tabindex="-1" onclick="showBlog(3)">Iris3</a></li>
+          <li class="eachOption" role="presentation"><a role="menuitem" tabindex="-1" onclick="showBlog(4)">Iris4</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <p id="bottomText3" align="center">
+        _________________________________________________________________________________________________________________________________________________________
+    </p>
+    <p id="bottomText2" align="center">EasyML is a free-to-use tool for data analysis and visualizing data using various Machine Learning algorithms.</p>
+    <p id="bottomText1" align="center">We own none of the photos and logos used here.</p>
+</body>
+</html>
