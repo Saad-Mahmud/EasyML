@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <title>Dataframe Editor Discussion</title>
     <style type="text/css">
 		.topButton
         {
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionDataframeEdit").push().set(
+                             firebaseRef.child("CommentSectionSVM").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
@@ -339,6 +339,9 @@
             The sections below correspond to each language that uses this term and are aimed at the<br>
             level of an audience only familiar with the given language.<br>
         </p>
+
+        <p style="font-size: 150%">Algorithm:-</p>
+        <p><a href="https://dev.mysql.com/doc/">See MySQL Documentation here</a></p>
 
 
     </div>
