@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <title>K Neighbors Discussion</title>
     <style type="text/css">
 		.topButton
         {
@@ -226,7 +226,7 @@
                          var pass=commentData.Password;
                          if( mail_id == email && password==pass)
                          {
-                             firebaseRef.child("CommentSectionKNeighbors").push().set(
+                             firebaseRef.child("CommentSectionSVM").push().set(
                                  {
                                      comment: document.getElementById("commentInput").value,
                                      Email: document.getElementById("mailInput").value,
