@@ -98,6 +98,10 @@ def hello_world():
 def pageAboutUs():
     return render_template('aboutUsPage.html')
 
+@EM_Server.route('/blog')
+def pageBlog():
+    return render_template('blog.html')
+
 @EM_Server.route('/request')
 def pageRequest():
     return render_template('requestPage.html')
