@@ -198,13 +198,13 @@
 
                     if(email!="" || comment!="")
                     {
-                        var showing = email + ": ";
+                        var showingOutput = email + ": ";
                         var span = document.createElement("sdfdasf");
                         span.style.color = "dodgerblue";
-                        span.appendChild(document.createTextNode(showing));
+                        span.appendChild(document.createTextNode(showingOutput));
                         document.getElementById("upperComments").appendChild(span);
-                        showing = comment + "\n";
-                        document.getElementById("upperComments").appendChild(document.createTextNode(showing));
+                        showingOutput = comment + "\n";
+                        document.getElementById("upperComments").appendChild(document.createTextNode(showingOutput));
                     }
                 }
             }
