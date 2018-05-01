@@ -119,6 +119,8 @@ def parse_contents(contents, filename, date):
     page1df = df
     global timeneede
     df2=df[:5]
+    timeneede=0.0
+    Page1_Util.a.__init__()
     return html.Div([
 
         html.Div([
@@ -230,13 +232,13 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
         return children
 
 
-def dr_maker(algo):
+def dr_maker(algo,lb):
     features = list(page1df)
-    features.remove('label')
+    features.remove(lb)
     #print(features)
     #print('\n\n')
     x = page1df.loc[:, features].values
-    y = page1df.loc[:, ['label']].values
+    y = page1df.loc[:, [lb]].values
     x = StandardScaler().fit_transform(x)
     #print(x)
     #print('\n\n')
@@ -269,7 +271,7 @@ def dr_maker(algo):
     timeneede=t1
     print(algo)
     print(t1)
-    finalDf = pd.concat([principalDf, page1df[['label']]], axis=1)
+    finalDf = pd.concat([principalDf, page1df[[lb]]], axis=1)
     #print(finalDf.head(5))
     #print('\n\n')
     return finalDf
@@ -289,7 +291,7 @@ def update_graph(algo_name, text_type,clk):
 
     print(clk)
     Page1_Util.a.nlcik=clk
-    df =dr_maker(algo_name)
+    df =dr_maker(algo_name,text_type)
     xx = np.array(df['principal component 1'])
     yy = np.array(df['principal component 2'])
     textt = np.array(df[text_type])

@@ -5,9 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Collapsible sidebar using Bootstrap 3</title>
+	<title>Dimensionality Reduction 2D</title>
         <style type="text/css">
            body { background: white !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+            ::-webkit-scrollbar
+        {
+            width: 5%;
+            border: 1px solid black;
+        }
+        ::-webkit-scrollbar-track
+        {
+            background: black;
+            border: 1px solid black;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+            background: white;
+            border: 1px solid black;
+        }
+        ::-webkit-scrollbar-thumb:hover
+        {
+            background: white;
+            border: 1px solid black;
+        }
+
+
+
         </style>
 
          <!-- Bootstrap CSS CDN -->
@@ -21,17 +44,18 @@
         <div id="content" style="position: relative">
 
                 <nav class="navbar navbar-expand navbar-dark bg-dark" style="position: fixed; top:0%; width: 100%; left: 0%; height: 10%;">
-                    <a class="navbar-brand" href="#" style="margin-left: 5.5%; margin-right: 6.4% ;color: #6d7fcc">EasyML</a>
+                    <a class="navbar-brand" href=".." style="color: royalblue; text-decoration:
+                     none; font-family: Ubuntu;margin-left: 1.5%; top: 1%; margin-right: -10%;
+                      ">
+                        <img src="/static/Images/EasyMLLogo2.png" style="height: 15%; width: 42%">
+                    </a>
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-iteme active">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/discussions/dimensionalityreduction2d">Discussion</a>
                       </li>
                       <li class="nav-item active">
-                        <a class="nav-link" href="#">Features</a>
-                      </li>
-                      <li class="nav-item active">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="../aboutUs">About us</a>
                       </li>
                     </ul>
                   </div>
@@ -40,56 +64,76 @@
             <div class="wrapper" >
 
             <!-- Sidebar Holder -->
-            <nav id="sidebar" style="position: fixed; top:10%; width: 100%; height: 100%; left: 0%">
+            <nav id="sidebar" style="position: fixed; top:10%; width: 100%;
+            height: 100%; left: 0%; overflow: auto">
                 <div class="sidebar-header">
-                    <h3>EasyML Menu</h3>
+                    <h3>Menu</h3>
                     <strong>BS</strong>
                 </div>
 
                 <ul class="list-unstyled components">
-                    <li class="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <li>
+                        <a href="#dataProcessSubmenu" data-toggle="collapse" aria-expanded="false" style="border-bottom: 1px solid white">
                             <i class="glyphicon glyphicon-home"></i>
-                            Home
+                            Data Process
                         </a>
-                        <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li><a href="#">Home 1</a></li>
-                            <li><a href="#">Home 2</a></li>
-                            <li><a href="#">Home 3</a></li>
+                        <ul class="collapse list-unstyled" id="dataProcessSubmenu">
+                            <li><a href="/page2" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Dataframe Editor(Visual)</a></li>
+                            <li><a href="/page12" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Dataframe Editor(SQL)</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#featureEngineeringSubmenu" data-toggle="collapse" aria-expanded="false" style="border-bottom: 1px solid white">
                             <i class="glyphicon glyphicon-briefcase"></i>
-                            About
+                            Feature Engineering
                         </a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                            <i class="glyphicon glyphicon-duplicate"></i>
-                            Pages
-                        </a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
-                            <li><a href="#">Page 1</a></li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
+                        <ul class="collapse list-unstyled" id="featureEngineeringSubmenu">
+                            <li class="active"><a href="/page1">Dimensionality Reduction 2D</a></li>
+                            <li><a href="/page3" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Dimensionality Reduction Model Analysis</a></li>
+                            <li><a href="/page4" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Dimensionality Reduction 3D</a></li>
+                            <li><a href="/page11" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Feature Selection</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#classifierSubmenu" data-toggle="collapse" aria-expanded="false" style="border-bottom: 1px solid white">
                             <i class="glyphicon glyphicon-link"></i>
-                            Portfolio
+                            Classifier Model
                         </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-paperclip"></i>
-                            FAQ
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="glyphicon glyphicon-send"></i>
-                            Contact
-                        </a>
+                            <ul class="collapse list-unstyled" id="classifierSubmenu">
+                                <li><a href="/page5" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">K Neighbors Classifier Analysis</a></li>
+                                <li><a href="/page6" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Logistic Regression Classifier Analysis</a></li>
+                                <li><a href="/page7" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Decision Tree Classifier Analysis</a></li>
+                                <li><a href="/page8" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Random Forest Classifier Analysis</a></li>
+                                <li><a href="/page9" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">3 Layered Perceptron Classifier</a></li>
+                                <li><a href="/page10" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">SVM</a></li>
+                                <li><a href="/page13" onmouseenter="this.style='background: white; color: royalblue'"
+                                                 onmouseleave="this.style='background: royalblue; color: white'"
+                                   style="background: royalblue;">Adaboost</a></li>
+                                <li><a onmouseenter="this.style='background: royalblue'" style="background: royalblue"></a></li>
+                                <li><a onmouseenter="this.style='background: royalblue'" style="background: royalblue"></a></li>
+                            </ul>
                     </li>
                 </ul>
 
@@ -97,7 +141,7 @@
 
             <!-- Page Content Holder -->
             <div class="embed-responsive embed-responsive-16by9" style="position: fixed; left: 20%; top: 15%; width: 80%;">
-                <iframe class="embed-responsive-item" src="/test/page2" ></iframe>
+                <iframe class="embed-responsive-item" src="/test/page14" ></iframe>
             </div>
             </div>
 

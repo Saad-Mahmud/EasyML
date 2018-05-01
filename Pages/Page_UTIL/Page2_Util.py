@@ -20,8 +20,9 @@ class putil():
                         rows=EP.util.maindata.df.to_dict('records'),
                         # optional - sets the order of columns
                         columns=sorted(EP.util.maindata.df.columns),
-                        row_selectable=True,
+                        row_selectable=False,
                         filterable=True,
+                        editable=False,
                         #sortable=True,
                         selected_row_indices=[],
                         id='Page2_table'
@@ -41,17 +42,17 @@ class putil():
                       html.Div(
                           [
                               html.Button(
-                                  'Delete Selected Row(s)',
+                                  'Delete Row With Null Value',
                                   type='submit',
                                   id='Page2_Bt_Delrows',
                                   style={
                                       'position': 'relative',
                                       'width': '40%',
-
                                       'background-color': '#7386D5',
                                       'border': '1px',
-                                      'float': 'left',
+                                      'float': 'right',
                                       'color': 'white',
+                                      'top': '5px',
                                       'font-size': '15px',
                                       'font-family': 'Helvetica'
                                   }),
@@ -86,7 +87,7 @@ class putil():
 
                                       'background-color': '#7386D5',
                                       'border': '1px',
-                                      'float': 'left',
+                                      'float': 'right',
                                       'color': 'white',
                                       'font-size': '15px',
                                       'font-family': 'Helvetica'
@@ -112,38 +113,37 @@ class putil():
                               'background': 'ghostwhite',
                           }
                       ),
-                      html.Div(
-                          [
-                              dcc.Dropdown(
-                                  options=[
+                      html.Div([
+                          dcc.Tabs(
+                              tabs=[
                                       {'label': 'See Corelation', 'value': 0},
                                       {'label': 'See Distribution', 'value': 1},
                                       {'label': 'Download data', 'value': 2}
-                                  ],
-                                  value=None,
-                                  id='Page2_Tabs'
-                              ),
-                          ],
-                          style={
-                              'display': 'inline-block',
-                              'position': 'relative',
-                              'width': '100%',
-                              'top': '100px',
-                              'background': 'ghostwhite',
-                          }
-                      ),
-                      html.Div(
-                          id='Page2_GT_output',
-                          style={
-                              'display': 'inline-block',
-                              'position': 'relative',
-                              'width': '100%',
-                              'top': '100px',
-                              'background': 'ghostwhite',
-                          }
+                              ],
+                              value=None,
+                              id='Page2_Tabs',
+                              vertical=False
+                          ),
+                          html.Div(
+                              id='Page2_GT_output',
+                              style={
+                                  'display': 'inline-block',
+                                  'position': 'relative',
+                                  'width': '100%',
+                                  'background': 'ghostwhite',
+                              }
 
-                      ),
-
+                          ),
+                      ], style={
+                          'display': 'inline-block',
+                          'position': 'relative',
+                          'width': '100%',
+                          'top': '100px',
+                          'background': 'ghostwhite',
+                          'fontFamily': 'Sans-Serif',
+                          'margin-left': 'auto',
+                          'margin-right': 'auto'
+                      }),
                   ]
                 )
             ],
@@ -189,14 +189,13 @@ def page2_tabsfun(value):
         return html.Div()
 @EM_App.callback(
     Output('Page2_table', 'rows'),
-    [Input('Page2_Bt_Delrows', 'n_clicks')],
-    [State('Page2_table', 'selected_row_indices')])
-def Page2_delrowfun(clk,delin):
+    [Input('Page2_Bt_Delrows', 'n_clicks')])
+def Page2_delrowfun(clk):
     if(clk==None):return EP.util.maindata.df.to_dict('records')
     if(clk<=EP.util.Bt_Delrows):return EP.util.maindata.df.to_dict('records')
     else:
         EP.util.Bt_Delrows=clk
-        EP.util.maindata.df=EP.util.maindata.df.drop(EP.util.maindata.df.index[delin])
+        EP.util.maindata.df=EP.util.maindata.df.dropna(axis=0, how='any')
         return EP.util.maindata.df.to_dict('records')
 
 @EM_App.callback(

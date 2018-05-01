@@ -64,7 +64,7 @@ def maketab2():
                 'display': 'inline-block',
                 'position': 'relative',
                 'width': '100%',
-                'top': '10px'
+                'top':'10px'
             }
         ),
     ])
@@ -320,7 +320,7 @@ def maketab3():
                             'position': 'relative',
                             'float': 'right',
                             'right': '2%',
-                            'width':'30%'
+                            'width':'40%'
                 }),
             ],
             style={

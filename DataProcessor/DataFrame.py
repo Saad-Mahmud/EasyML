@@ -15,12 +15,10 @@ import copy
 class dtf():
 
     def make_XY(self,name):
-        print(name)
-        print(self.available_indicators)
+        print("Make_xy = {}".format(name))
         self.features = copy.deepcopy(self.available_indicators)
         self.features.remove(name)
-        print(self.available_indicators)
-        print(self.features)
+        print("Make_xy = {}".format(self.features))
         self.labelname=name
         self.N_features=len(self.features)
         self.X = copy.deepcopy(self.df.loc[:, self.features].values)

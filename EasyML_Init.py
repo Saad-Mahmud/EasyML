@@ -24,7 +24,7 @@ EM_App.css.append_css(
 )
 
 #test
-@EM_Server.route('/demo')
+@EM_Server.route('/d')
 def bstest():
     return render_template('index4.html')
 
