@@ -8,9 +8,9 @@ import pandas as pd
 import copy
 from Pages.Page_UTIL import Static as st
 from EasyML_Init import EM_App as app
-from pandasql import PandaSQL
+from pandasql import sqldf
 
-pdsql = PandaSQL()
+pdsql = lambda q: sqldf(q, globals())
 
 layout = html.Div([
     html.H3
@@ -77,7 +77,7 @@ layout = html.Div([
         'font-size': '90%',
         'font-family': 'Helvetica'
     }),
-    dcc.Input(id='page12_queryBox', placeholder='Place query here...', type='text', style={
+    dcc.Input(id='page12_queryBox', placeholder='Place query here...\n', type='text', style={
         'width': '100%', 'margin-top': '2%', 'margin-bottom': '2%'}),
     html.H5('', id='page12_downLink'),
     html.H5('', id='page12_testText'),
@@ -175,10 +175,10 @@ def page12_runQuery(n_clicks, value):
     elif (n_clicks>st.a.clk):
         try:
             st.a.clk=n_clicks
+            str2 = value
             table1= st.a.tab1
             table2 = st.a.tab2
-            str2=value
-            final_table=pdsql(str2)
+            final_table=sqldf(str2,locals())
             st.a.tab3=copy.deepcopy(final_table)
             print(st.a.tab3)
             st.final.clk=n_clicks
@@ -192,6 +192,6 @@ def page12_runQuery(n_clicks, value):
             strr = str(e)
             parse = strr.split(")")
             parse1 = parse[1].split("[")
-            print(parse1[0])
+            print(e)
             return html.Div([
                 html.H4(str(parse1[0]))], style={'margin-top': '5%'})

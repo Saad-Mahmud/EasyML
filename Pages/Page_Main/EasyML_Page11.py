@@ -16,13 +16,15 @@ layout = html.Div([
     html.Div([
 
         html.Div([
+
             html.H3
                 (
                     children='Recursive Feature Elimination',
                     style={
                         'textAlign': 'center',
-                        'color': colors['text2'],
-                        'font-size': '40px'
+                        'color': 'white',
+                        'font-size': '40px',
+                        'background':'#6d7fcc'
                     }
                 ),
             dcc.Upload

@@ -7,6 +7,7 @@ import dash_table_experiments as dt
 from EasyML_Init import EM_App
 from Pages.Page_Main import EasyML_Page11
 from Pages.Page_Graphics import Page11_AlgoDash
+from Pages.Page_Graphics import Page11_Ranker
 
 
 class putil():
@@ -30,32 +31,33 @@ class putil():
             html.Div(
                 [
                     html.P(children='Select Model: ',
-                            style={
-                                'position':'relative',
-                                'font-size':'23px',
-                                'border':'1px solid black',
-                                'float':'left',
-                            }),
+                           style={
+                               'position': 'relative',
+                               'font-size': '23px',
+                               'border': '1px',
+                               'float': 'left',
+                               'font-family': 'Helvetica'
+                           }),
                     html.Div(
                         [dcc.Dropdown(
                         id='Page11_Dd_Model',
                         options=[{'label': 'Logistic Classifier', 'value': 'LR'},
-                                 {'label': 'SVM', 'value': 'SVM'}],
+                                 {'label': 'SVM', 'value': 'SVM'},
+                                 {'label': 'Random Forest', 'value': 'RF'}],
                         value='SVM',)],
                         style={
                             'position': 'relative',
                             'width': '20%',
                             'left': '3%',
-                            'border': '1px solid black',
                             'float': 'left',
                         }),
                     html.P(children='Select Label: ',
                            style={
                                'position': 'relative',
                                'font-size': '23px',
-                               'border': '1px solid black',
                                'float': 'left',
-                               'left':'6%'
+                               'left':'6%',
+                                'font-family': 'Helvetica'
                            }),
                     html.Div(
                         [dcc.Dropdown(
@@ -66,7 +68,6 @@ class putil():
                             'position': 'relative',
                             'width': '20%',
                             'left': '9%',
-                            'border': '1px solid black',
                             'float': 'left',
                         }),
                     html.Button(
@@ -74,17 +75,22 @@ class putil():
                         id='Page11_Bt_Model',
                         style={
                             'position': 'relative',
+                            'background-color': '#7386D5',
                             'width': '20%',
-                            'left': '12%',
-                            'border': '1px solid black',
-                            'float': 'left',
+                            'right': '10px',
+                            'border': '1px',
+                            'float': 'right',
+                            'color': 'white',
+                            'font-size': '15px',
+                            'font-family': 'Helvetica'
                         }),
                 ],
                 style={
                     'display': 'inline-block',
                     'position': 'relative',
                     'width': '100%',
-                    'top': '25px'
+                    'top': '50px',
+                    'background': 'ghostwhite'
                 }
             ),
             html.Div(id='Page11_Algo',style=
@@ -135,14 +141,14 @@ def update_ui(name,lab,click):
     print("Debug: {} {} & {}".format(lab,name,click))
     if(name==None):
         if (click != None): EasyML_Page11.util.N_Click_bt1 = click
-        return [html.P("---------------- Select a Model---------------",
+        return [html.P("",
                        style={
             'font-size': '15px',
             'color': 'red'
         })]
     elif(lab==None):
         if(click!=None): EasyML_Page11.util.N_Click_bt1 = click
-        return [html.P("---------------- Select a Label---------------",
+        return [html.P("",
                        style={
                            'font-size': '15px',
                            'color': 'red'
@@ -158,7 +164,15 @@ def update_ui(name,lab,click):
     else:
         EasyML_Page11.util.N_Click_bt1=click
         EasyML_Page11.util.Page11_Algo_Maker(lab)
-        if(name=='SVM'):return Page11_AlgoDash.SVMDash()
-        else: return Page11_AlgoDash.LRDash()
+        if(name=='SVM'):
+            Page11_Ranker.SVMAlgo()
+            return Page11_Ranker.ranklist()
+        elif(name=='RF'):
+            Page11_Ranker.RFAlgo()
+            return Page11_Ranker.ranklist()
+
+        else:
+            Page11_Ranker.LRAlgo()
+            return Page11_Ranker.ranklist()
 
 

@@ -221,11 +221,11 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
 
 def dr_maker(algo,text):
     features = list(page1df)
-    features.remove('label')
+    features.remove(text)
     #print(features)
     #print('\n\n')
     x = page1df.loc[:, features].values
-    y = page1df.loc[:, ['label']].values
+    y = page1df.loc[:, [text]].values
     x = StandardScaler().fit_transform(x)
     #print(x)
     #print('\n\n')

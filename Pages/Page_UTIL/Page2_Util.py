@@ -6,6 +6,7 @@ import dash_table_experiments as dt
 from EasyML_Init import EM_App
 from Pages.Page_Main import EasyML_Page2 as EP
 from Pages.Page_Graphics import Page2_Tabs_Layout as P2TL
+from sklearn import preprocessing
 
 
 class putil():
@@ -36,6 +37,41 @@ class putil():
                     'width':'95%'
                     }
                 ),
+                 html.Div(
+                     [
+                         html.Div([dcc.Dropdown(
+                             options=[
+                                 {'label': i, 'value': i} for i in EP.util.maindata.available_indicators
+                             ],
+                             multi=True,
+                             value=None,
+                             id='Page2_Labelcols',
+                         )],style={
+                                 'position': 'relative',
+                                 'width': '40%',
+                                 'float': 'left',
+                                }),
+                         html.Button(
+                             'Encode to Integer',
+                             type='submit',
+                             id='Page2_Bt_Labelcols',
+                             style={
+                                 'position': 'relative',
+                                 'width': '40%',
+                                 'background-color': '#7386D5',
+                                 'border': '1px',
+                                 'float': 'right',
+                                 'color': 'white',
+                                 'font-size': '15px',
+                                 'font-family': 'Helvetica'
+                             }),
+                     ],style={
+                              'display': 'inline-block',
+                              'position': 'relative',
+                              'width': '100%',
+                              'top': '50px',
+                              'background': 'ghostwhite',
+                          }),
                 html.Div
                 (
                   [
@@ -51,6 +87,21 @@ class putil():
                                       'background-color': '#7386D5',
                                       'border': '1px',
                                       'float': 'right',
+                                      'color': 'white',
+                                      'top': '5px',
+                                      'font-size': '15px',
+                                      'font-family': 'Helvetica'
+                                  }),
+                              html.Button(
+                                  'Replace Null with Zero',
+                                  type='submit',
+                                  id='Page2_Bt_Fillrows',
+                                  style={
+                                      'position': 'relative',
+                                      'width': '40%',
+                                      'background-color': '#7386D5',
+                                      'border': '1px',
+                                      'float': 'left',
                                       'color': 'white',
                                       'top': '5px',
                                       'font-size': '15px',
@@ -163,7 +214,9 @@ class putil():
             self.maindata=DataFrame.dtf(contents, names, dates)
             self.Bt_Tab2 = 0
             self.Bt_Delrows = 0
+            self.Bt_Fillrows = 0
             self.Bt_Delcols = 0
+            self.Bt_Labelcols = 0
             self.Bt_Tab2_name=''
             self.Bt_Tab1_X = ''
             self.Bt_Tab1_Y = ''
@@ -187,16 +240,34 @@ def page2_tabsfun(value):
         return P2TL.maketab3()
     else:
         return html.Div()
+
 @EM_App.callback(
     Output('Page2_table', 'rows'),
-    [Input('Page2_Bt_Delrows', 'n_clicks')])
-def Page2_delrowfun(clk):
-    if(clk==None):return EP.util.maindata.df.to_dict('records')
-    if(clk<=EP.util.Bt_Delrows):return EP.util.maindata.df.to_dict('records')
-    else:
-        EP.util.Bt_Delrows=clk
+    [Input('Page2_Bt_Delrows', 'n_clicks'),
+     Input('Page2_Bt_Fillrows', 'n_clicks'),
+     Input('Page2_Bt_Labelcols', 'n_clicks'),
+     Input('Page2_Labelcols', 'value')])
+def Page2_delrowfun(clk1,clk2,clk3,val):
+    if(clk1==None):clk1=0
+    if(clk2 == None): clk2 = 0
+    if (clk3 == None): clk3 = 0
+    if(clk1<=EP.util.Bt_Delrows and clk2<=EP.util.Bt_Fillrows and clk3<=EP.util.Bt_Labelcols):
+        return EP.util.maindata.df.to_dict('records')
+    elif (clk1>EP.util.Bt_Delrows):
+        EP.util.Bt_Delrows=clk1
         EP.util.maindata.df=EP.util.maindata.df.dropna(axis=0, how='any')
         return EP.util.maindata.df.to_dict('records')
+    elif (clk2>EP.util.Bt_Fillrows):
+        EP.util.Bt_Fillrows=clk2
+        EP.util.maindata.df=EP.util.maindata.df.fillna(0)
+        return EP.util.maindata.df.to_dict('records')
+    elif(clk3>EP.util.Bt_Labelcols and val !=None):
+        EP.util.Bt_Labelcols = clk3
+        le = preprocessing.LabelEncoder()
+        le.fit(EP.util.maindata.df[val])
+        EP.util.maindata.df[val] = le.transform(EP.util.maindata.df[val])
+        return EP.util.maindata.df.to_dict('records')
+
 
 @EM_App.callback(
     Output('Page2_table', 'columns'),

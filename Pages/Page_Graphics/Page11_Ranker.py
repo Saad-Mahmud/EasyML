@@ -1,19 +1,23 @@
 from Pages.Page_Main import EasyML_Page11
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 import copy
 import dash_html_components as html
 import dash_core_components as dcc
 from sklearn.svm import SVC
 import urllib.parse
-from dash.dependencies import Input, Output
 from EasyML_Init import EM_App
+import dash
+from dash.dependencies import Input, Output,State
+import dash_core_components as dcc
+import dash_html_components as html
+import dash_table_experiments as dt
 
-def LRAlgo(itr,sol,al):
-    if(sol=='liblinear' and al=='multinomial'):return
-    print('{} {} {}'.format(itr,sol,al))
+def LRAlgo():
     maindata=copy.deepcopy(EasyML_Page11.util.maindata)
-    lr = LogisticRegression(max_iter=itr,multi_class=al,solver=sol)
+    lr = LogisticRegression(max_iter=200)
+    lr = RandomForestClassifier()
     rfe = RFE(lr)
     rfe = rfe.fit(maindata.X,maindata.Y)
     print(rfe.ranking_)
@@ -23,16 +27,26 @@ def LRAlgo(itr,sol,al):
     print(EasyML_Page11.util.RankofF)
     print('done')
 
-def SVMAlgo(c,g,d,k,dp):
-
-    print('{} {} {} {} {}'.format(c,g,d,k,dp))
+def RFAlgo():
     maindata=copy.deepcopy(EasyML_Page11.util.maindata)
-    if(dp=='reg'):
+    lr = RandomForestClassifier()
+    rfe = RFE(lr)
+    rfe = rfe.fit(maindata.X,maindata.Y)
+    print(rfe.ranking_)
+    EasyML_Page11.util.RankofF=[]
+    EasyML_Page11.util.RankofF=[(maindata.features[i], rfe.ranking_[i]) for i in range(maindata.N_features)]
+    EasyML_Page11.util.RankofF=sorted(EasyML_Page11.util.RankofF, key=lambda rf: rf[1])
+    print(EasyML_Page11.util.RankofF)
+    print('done')
+
+def SVMAlgo():
+    maindata=copy.deepcopy(EasyML_Page11.util.maindata)
+    if(True):
         min_train = maindata.X.min(axis=0)
         range_train = 0.1+(maindata.X - min_train).max(axis=0)
         maindata.X = (maindata.X - min_train) / range_train
 
-    dt = SVC(random_state=42,C=c,gamma=g,degree=d,kernel=k)
+    dt = SVC(random_state=42,kernel='linear')
     rfe = RFE(dt)
     rfe = rfe.fit(maindata.X,maindata.Y)
     print(rfe.ranking_)
@@ -70,21 +84,68 @@ def finalDataR(l,r):
     return csv_string
 
 def ranklist():
-
+    ls = [{'Feature': i[0],'Variance': i[1]} for i in EasyML_Page11.util.RankofF]
 
     return html.Div([
-        html.H6("Download Option:"),
-        dcc.Dropdown(
-            options=[
-                {'label': 'Select Range', 'value': 0},
-                {'label': 'Select Manually', 'value': 1},
+        html.Div([
+            html.Div([
+                dt.DataTable(
+                    rows=ls,
+                    row_selectable=True,
+                    editable=False,
+                    filterable=True,
+                    # sortable=True,
+                    selected_row_indices=[],
+                    id='Page11_table'
+                ),
             ],
-            value=None,
-            id='Page11_Dlop'
+                className="container",
+                style={
+                    'position': 'relative',
+                    'background': '#7386D5',
+                    'width': '100%',
+                    'top':'50px'
+                }
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        id='Page11_Dlink',
+                        style={
+                            'position': 'relative',
+                            'width': '40%',
+                            'float': 'left',
+                            'color': 'white',
+                            'font-size': '25px',
+                            'left': '20px',
+                            'font-family': 'Helvetica'
+                        }
+                    ),
+                    html.Button(
+                        'Download',
+                        type='submit',
+                        id='Page11_Bt_Download',
+                        style={
+                            'position': 'relative',
+                            'width': '20%',
+                            'background-color': '#7386D5',
+                            'border': '1px',
+                            'float': 'right',
+                            'color': 'white',
+                            'font-size': '15px',
+                            'font-family': 'Helvetica'
+                        }),
+                ],
+                style={
+                    'display': 'inline-block',
+                    'position': 'relative',
+                    'width': '100%',
+                    'top': '50px',
+                    'background': 'ghostwhite',
+                }
+            ),
+        ],
         ),
-        html.Div(id='Page11_Dlink1'),
-        html.Div(id='Page11_Dlink2'),
-        html.Div(id='Page11_Flist')
     ])
 
 
@@ -93,141 +154,22 @@ def dum():
     html.Div([])
 
 
-@EM_App.callback(Output('Page11_Frange_l', 'children'),
-              [Input('Page11_Frange', 'value')])
-def update_graphic(value):
-    print(" Slider {} {}".format(value[0],value[1]))
-    return 'Select Range [ {} - {} ]: '.format(value[0]+1,value[1]+1)
-
-
-@EM_App.callback(Output('Page11_Flist', 'children'),
-              [Input('Page11_Dlop', 'value')])
-def update_graphic(value):
-    if(value==0):
-        return html.Div([
-            html.Button(
-                'Get Download link',
-                id='Page11_Bt_Rdl',
-                style={
-                    'position': 'relative',
-                    'width': '18%',
-                    'border': '1px solid black',
-                    'float': 'left',
-                }),
-            html.P(children='Select Range [ {} - {} ]: '.format(1, 3),
-                   id='Page11_Frange_l',
-                   style={
-                       'position': 'relative',
-                       'font-size': '23px',
-                       'border': '1px solid black',
-                       'left':'10%',
-                       'float': 'left',
-                   }),
-                html.Div(
-                    [dcc.RangeSlider(
-                        id='Page11_Frange',
-                        count=1,
-                        min=0,
-                        max=EasyML_Page11.util.maindata.N_features - 1,
-                        step=1,
-                        value=[0, 2]
-                    )],
-                    style={
-                        'position': 'relative',
-                        'width': '28%',
-                        'top':'10px',
-                        'left':'12%',
-                        'border': '1px solid black',
-                        'float': 'left',
-                    }),
-            ],
-            style={
-                'display': 'inline-block',
-                'position': 'relative',
-                'width': '100%',
-                'top': '25px'
-            }
-        )
-    elif(value==1):
-        return html.Div([
-            html.Button(
-                'Get Download link',
-                id='Page11_Bt_Sdl',
-                style={
-                    'position': 'relative',
-                    'width': '18%',
-                    'border': '1px solid black',
-                    'float': 'left',
-                }),
-            html.P(children='Select Manually(Ranked):',
-                   style={
-                       'position': 'relative',
-                       'font-size': '23px',
-                       'border': '1px solid black',
-                       'left': '10%',
-                       'float': 'left',
-                   }),
-            html.Div(
-                [
-                    dcc.Checklist(
-                        options=[
-                            {'label': '{} [{}]'.format(i[0],i[1]), 'value': i[0]} for i in EasyML_Page11.util.RankofF
-                        ],
-                        values=[],
-                        id='Page11_Fsel',
-                    )
-                ],
-                style={
-                    'position': 'relative',
-                    'width': '20%',
-                    'left': '20%',
-                    'border': '1px solid black',
-                    'float': 'left',
-                }),
-
-        ],
-            style={
-                'display': 'inline-block',
-                'position': 'relative',
-                'width': '100%',
-                'top': '25px'
-            }
-        )
-
-@EM_App.callback(Output('Page11_Dlink1', 'children'),
-              [Input('Page11_Bt_Rdl', 'n_clicks'),
-               Input('Page11_Frange', 'value')])
-def dlink1(value,rng):
-    if(value==None):
-        return html.Div([])
-    elif (value <= EasyML_Page11.util.N_Click_DL1):
-        return html.Div([])
-    else:
-        EasyML_Page11.util.N_Click_DL1=value
-        return  [html.A(
-            "Download Data(Range)({})".format(value),
-            id='download-link',
+@EM_App.callback(
+    Output('Page11_Dlink', 'children'),
+    [Input('Page11_Bt_Download', 'n_clicks')],
+    [State('Page11_table', 'selected_row_indices'),
+     State('Page11_table', 'rows')])
+def Page2_delrowfun(clk,delin,rows):
+    print(delin)
+    print(rows)
+    ls=[]
+    for i in delin:
+        ls.append(rows[i]['Feature'])
+    if(clk==None):return [html.A()]
+    return  [html.A(
+            "Download Data({})".format(clk),
+            id='download-link14',
             download="rawdata.csv",
-            href=finalDataR(rng[0],rng[1]),
-            target="_blank"
-        )]
-
-@EM_App.callback(Output('Page11_Dlink2', 'children'),
-              [Input('Page11_Bt_Sdl', 'n_clicks'),
-               Input('Page11_Fsel', 'values')])
-def dlink2(value,rng):
-    if(rng==None):
-        return html.Div([])
-    if(value==None):
-        return html.Div([])
-    elif(value <= EasyML_Page11.util.N_Click_DL2):
-        return html.Div([])
-    else:
-        EasyML_Page11.util.N_Click_DL2=value
-        return  [html.A(
-            "Download Data(Manual)({})".format(value),
-            id='download-link',
-            download="rawdata.csv",
-            href=finalData(rng),
+            href=finalData(ls),
             target="_blank"
         )]
