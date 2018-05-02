@@ -101,13 +101,13 @@
         }
         function goRight()
         {
-            page=(page%13)+1;
+            page=(page%14)+1;
             replaceAlgos(page);
         }
         function goLeft()
         {
             page--;
-            if(page<=0)page=13;
+            if(page<=0)page=14;
             replaceAlgos(page);
         }
         function replaceAlgos(a)
@@ -177,6 +177,11 @@
                 discussionPage='/discussions/adaboost';
                 visualizingPage='/page13'
             }
+	    else if(a==14)
+            {
+                discussionPage='/discussions/adaboost';
+                visualizingPage='/page14'
+            }
         }
 	</script>
 </head>
@@ -222,7 +227,7 @@
 
       <div href="test" class="item">
         <img src="/static/Images/bg2indigo.jpg" style="height: 100%; width: 100%;">
-        <a href="/page3" class="algoName" style="left: 27%; top: 9%">DIMENTSIONALITY<br>REDUCTION<br>MODEL ANALYSIS</a>
+        <a href="/page3" class="algoName" style="left: 27%; top: 9%">REDUCE DIMENSION<br>OF DATASET</a>
     </div>
 
       <div href="test" class="item">
@@ -271,8 +276,13 @@
     </div>
 
       <div href="test" class="item">
-        <img src="/static/Images/bg2black.jpg" style="height: 100%; width: 100%;">
+        <img src="/static/Images/bg2brown.jpg" style="height: 100%; width: 100%;">
         <a href="/page13" class="algoName" style="left: 36%; top: 21%">ADABOOST</a>
+    </div>
+	  
+      <div href="test" class="item">
+        <img src="/static/Images/bg2black.jpg" style="height: 100%; width: 100%;">
+        <a href="/page13" class="algoName" style="left: 36%; top: 19%">VARIANCE<br>THRESHOLD</a>
     </div>
 
   </div>
