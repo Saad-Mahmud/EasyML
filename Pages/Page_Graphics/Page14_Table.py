@@ -19,7 +19,7 @@ def createTable():
     print(EasyML_Page14.util.maindata.X)
     print(selector.variances_)
     ls=[{'Feature':EasyML_Page14.util.maindata.features[i],
-         'Variance':selector.variances_[i]} for i in range(EasyML_Page14.util.maindata.N_features)
+         'Rank':selector.variances_[i]} for i in range(EasyML_Page14.util.maindata.N_features)
         ]
     print(ls)
     EasyML_Page14.util.tab1= html.Div([

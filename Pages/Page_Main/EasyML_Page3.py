@@ -3,6 +3,7 @@ import datetime
 import io
 from time import time
 import dash
+import urllib.parse
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
@@ -14,8 +15,10 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.manifold import Isomap
 from sklearn.manifold import LocallyLinearEmbedding
+from sklearn.manifold import MDS
+from sklearn.manifold import SpectralEmbedding as SE
 from sklearn.preprocessing import StandardScaler
-
+from Pages.Page_UTIL import Page3_Util
 from EasyML_Init import EM_App
 
 colors = {
@@ -28,16 +31,23 @@ layout = html.Div([
 
     html.Div([
 
+        #Title
         html.Div([
-            html.H3(children='Model Analysis',
+            html.H3
+                (
+                    children='Reduce Dimension of DataSet',
                     style={
                         'textAlign': 'center',
-                        'color': colors['text2'],
-                        'font-size': '40px'
-                    }),
-            dcc.Upload(
-                id='Page3_upload-data',
-                children=html.Div([
+                        'color': 'white',
+                        'font-size': '40px',
+                        'background':'#6d7fcc'
+                    }
+                ),
+            #Page CSV
+            dcc.Upload
+                (
+                    id='Page3_upload-data',
+                    children=html.Div([
                     'Drag and Drop or ',
                     html.A('Select File')
                 ]),
@@ -55,97 +65,150 @@ layout = html.Div([
                 # Allow multiple files to be uploaded
                 multiple=False
             ),
-            html.Div(id='Page3_output-data-upload')
+            #Page Main Layout
+            html.Div(id='Page3_output-data-upload'),
+
         ],
         style={
-        'align':'center',
-        'position':'relative',
-        }
-        )
-    ], style={
+            'align':'center',
+            'position':'relative',
+            }
+        )],
+        style={
         'width':'95%',
         'left' : '20px',
         'position':'relative',
         'background': 'white',
         'top':'20px',
-    }
-    ),
+    }),
+])
 
-    ],
-)
 
-page1df = pd.DataFrame()
-timeneede=0.0
-itrsz=[]
-timeofitr=[]
-errorofitr=[]
-done=''
-curfilename=''
 def parse_contents(contents, filename, date):
-    content_type, content_string = contents.split(',')
-
-    decoded = base64.b64decode(content_string)
-    try:
-        if 'csv' in filename:
-            # Assume that the user uploaded a CSV file
-            df = pd.read_csv(
-                io.StringIO(decoded.decode('utf-8')))
-        elif 'xls' in filename:
-            # Assume that the user uploaded an excel file
-            df = pd.read_excel(io.BytesIO(decoded))
-    except Exception as e:
-        print(e)
-        return html.Div([
-            'There was an error processing this file.'
-        ])
-    available_indicators = list(df)
-    global page1df
-    page1df = df
-    global timeneede
-    global done
-    global curfilename
-    curfilename=filename
-    dr_maker()
-    done=filename
+    Page3_Util.a.__init__()
+    Page3_Util.a.addData(contents, filename, date)
+    df2 = Page3_Util.a.maindata.df[:5]
     return html.Div([
 
-        #html.H5(filename),
-        #html.H6(datetime.datetime.fromtimestamp(date)),
+        html.Div(
+            [html.H5(filename + '(First 5 row)'),
+             dt.DataTable(rows=df2.to_dict('records'))],
+            style={
+                'position': 'relative',
+                'border': '1px',
+                'top': '15px'
+            }
+        ),
 
-        # Use the DataTable prototype component:
-        # github.com/plotly/dash-table-experiments
-        #dt.DataTable(rows=df.to_dict('records')),
+        html.Div(
+            [
+                html.P(children='Label: ',
+                       style={
+                           'position': 'relative',
+                           'font-size': '23px',
+                           'border': '1px',
+                           'float': 'left',
+                           'font-family': 'Helvetica'
+                       }),
+                html.Div(
+                    [dcc.Dropdown(
+                        id='Page3_Dd_Label',
+                        options=[{'label': i, 'value': i} for i in Page3_Util.a.maindata.available_indicators],
+                        value=None, )],
+                    style={
+                        'position': 'relative',
+                        'width': '20%',
+                        'left': '10px',
+                        'border': '1px',
+                        'float': 'left',
+                        'top': '3px'
+                    }),
+                html.P(children='Algo: ',
+                       style={
+                           'position': 'relative',
+                           'font-size': '23px',
+                           'border': '1px',
+                           'float': 'left',
+                           'left': '40px',
+                           'font-family': 'Helvetica'
+                       }),
+                html.Div(
+                    [dcc.Dropdown(
+                        id='Page3_Dd_Algo',
+                        options=[{'label': i, 'value': i} for i in ['PCA', 'Linear Embading', 'Isomap'
+                            , 'TSNE', 'MDS', 'SpectralEmbedding'
+                                                                    ]],
+                        value=None, )],
+                    style={
+                        'position': 'relative',
+                        'width': '20%',
+                        'left': '50px',
+                        'border': '1px',
+                        'float': 'left',
+                        'top': '3px'
+                    }),
+                html.Div(
+                    [dcc.Dropdown(
+                        id='Page3_Dd_Dimension',
+                        options=[{'label': i + 1, 'value': i + 1} for i in
+                                 range(len(Page3_Util.a.maindata.available_indicators) - 1)],
+                        value=None, )],
+                    style={
+                        'position': 'relative',
+                        'width': '20%',
+                        'right': '5px',
+                        'border': '1px',
+                        'float': 'right',
+                        'top': '3px'
+                    }),
+                html.P(children='Dimension: ',
+                       style={
+                           'position': 'relative',
+                           'font-size': '23px',
+                           'border': '1px',
+                           'float': 'right',
+                           'right': '15px',
+                           'font-family': 'Helvetica'
+                       }),
 
-        #html.Hr(),
-        html.Button('Generate', id='Page3_button',style={
-            'textAlign': 'center'}),
-        html.Div
-        ([
-            html.Div([
-                html.Div([html.H6('Time VS. Dimension')],id='p3gl1',style={
-            'textAlign': 'center',
-            'color': colors['text2'],
-            'font-size':'30px'
-        })
-            ]),
-            dcc.Graph(id='Page3_indicator-graphic1')
-        ]),
-        html.Hr(),
-
-      html.Div
-        ([
-            html.Div([
-                html.Div([html.H6('Error VS. Dimension')],id='p3gl2',style={
-            'textAlign': 'center',
-            'color': colors['text2'],
-            'font-size':'30px'
-        })
-            ]),
-            dcc.Graph(id='Page3_indicator-graphic2')
-        ]),
-
+            ],
+            style={
+                'display': 'inline-block',
+                'position': 'relative',
+                'width': '100%',
+                'top': '50px',
+                'background': 'ghostwhite'
+            }
+        ),
+        html.Div(
+            [
+                html.Button(
+                    'Download',
+                    id='Page3_Bt_Apply',
+                    style={
+                        'position': 'relative',
+                        'background-color': '#7386D5',
+                        'width': '40%',
+                        'right': '5px',
+                        'border': '1px',
+                        'float': 'right',
+                        'color': 'white',
+                        'font-size': '15px',
+                        'font-family': 'Helvetica'
+                    }),
+                html.Div(id='Page3_Dlink')
+            ],
+            style={
+                'display': 'inline-block',
+                'position': 'relative',
+                'width': '100%',
+                'top': '50px',
+                'background': 'ghostwhite'
+            }
+        ),
     ])
 
+'''Gen Data'''
 
 @EM_App.callback(Output('Page3_output-data-upload', 'children'),
               [Input('Page3_upload-data', 'contents'),
@@ -158,119 +221,55 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
         return children
 
 
-def dr_maker():
-    global done
-    global curfilename
-    if(done==curfilename):return
-    features = list(page1df)
-    print(features)
-    features.remove('label')
-    print(features)
-    print('\n\n')
-    x = page1df.loc[:, features].values
-    y = page1df.loc[:, ['label']].values
-    x = StandardScaler().fit_transform(x)
-    global itrsz
-    global timeofitr
-    global errorofitr
-    print(len(x[0]))
-    itrsz=[]
-    timeofitr=[]
-    errorofitr=[]
-    i=0
-    while(i<len(x[0])+1):
-        print(i)
-        pca = PCA(n_components=i)
-        t0= time()
-        principalComponents = pca.fit_transform(x)
-        t1= time()
-        t1=t1-t0
-        itrsz.append(i)
-        timeofitr.append(t1*1000)
-        pp=(pca.explained_variance_ratio_)
-        err=0.0
-        for j in pp:
-            err=err+j
-        errorofitr.append((1.0-err)*100)
-        if(i<10):i=i+1
-        elif(i<100):i=i+10
-        elif(i<1000):i=i+100
-    done=True
-    return
+def finalData(algo,lb,dm):
 
+    Page3_Util.a.maindata.make_XY(lb)
+    pca = LocallyLinearEmbedding(n_components=dm)
+    if algo=='PCA':
+        pca = PCA(n_components=dm)
+    elif algo=='Linear Embading':
+        pca = LocallyLinearEmbedding(n_components=dm)
+    elif algo== 'Isomap':
+        pca = Isomap(n_components=dm)
+    elif algo== 'MDS':
+        pca = MDS(n_components=dm)
+    elif algo== 'SpectralEmbedding':
+        pca = SE(n_components=dm)
+    else:
+        if dm==Page3_Util.a.maindata.N_features:dm=dm-1
+        pca = TSNE(n_components=dm)
+
+    principalComponents = pca.fit_transform(Page3_Util.a.maindata.X)
+    principalDf = pd.DataFrame(data=principalComponents
+                               , columns=["D{}".format(i) for i in range(dm)])
+    finalDf = pd.concat([principalDf, Page3_Util.a.maindata.df[[lb]]], axis=1)
+    csv_string = finalDf.to_csv(index=False, encoding='utf-8')
+    csv_string = "data:text/csv;charset=utf-8," + urllib.parse.quote(csv_string)
+    return csv_string
+
+
+#Graph
 @EM_App.callback(
-    dash.dependencies.Output('Page3_indicator-graphic1', 'figure'),
-    [dash.dependencies.Input('Page3_button', 'n_clicks')])
-def update_graph(n_clicks):
+    dash.dependencies.Output('Page3_Dlink', 'children'),
+    [dash.dependencies.Input('Page3_Dd_Algo', 'value'),
+    dash.dependencies.Input('Page3_Dd_Label', 'value'),
+     dash.dependencies.Input('Page3_Dd_Dimension', 'value'),
+     dash.dependencies.Input('Page3_Bt_Apply', 'n_clicks')])
+def update_graph(algo,lb,dm,clk):
+    #init Button
+    if(algo== None): return html.Div([])
+    if (lb == None): return html.Div([])
+    if (dm == None): return html.Div([])
+    if(clk==None):return html.Div([])
+    if(clk<= Page3_Util.a.nlcik): return html.Div([])
+    Page3_Util.a.nlcik=clk
+    return [html.A(
+        "Download Data({})".format(clk),
+        id='download-link14',
+        download="rawdata.csv",
+        href=finalData(algo,lb,dm),
+        target="_blank"
+    )]
 
-    global itrsz
-    global  timeofitr
-    print(itrsz)
-    print(timeofitr)
-    xx = np.array(itrsz)
-    yy = np.array(timeofitr)
 
-    return {
-        'data': [
-            go.Scatter(
-                x=xx,
-                y=yy,
-                text='(Dimension,Time)',
-                mode='lines+markers',
-                marker={
-                    'size': 15,
-                    'opacity': 0.5,
-                    'color': 'RED',
-                    'line': {'width': 0.5, 'color': 'white'}
-                }
-            )],
-        'layout': go.Layout(
-            xaxis={
-                'title': 'Dimension',
-                'type': 'linear'
-            },
-            yaxis={
-                'title': 'Time(MS)',
-                'type': 'linear'
-            },
-            margin={'l': 40, 'b': 40, 't': 10, 'r': 0},
-            hovermode='closest'
-        )
-    }
 
-@EM_App.callback(
-    dash.dependencies.Output('Page3_indicator-graphic2', 'figure'),
-    [dash.dependencies.Input('Page3_button', 'n_clicks')])
-def update_graph(n_clicks):
-    global itrsz
-    global errorofitr
-    xx = np.array(itrsz)
-    yy = np.array(errorofitr)
-
-    return {
-        'data': [
-            go.Scatter(
-                x=xx,
-                y=yy,
-                text='(Dimension,Error)',
-                mode='lines+markers',
-                marker={
-                    'size': 15,
-                    'opacity': 0.5,
-                    'color': 'RED',
-                    'line': {'width': 0.5, 'color': 'white'}
-                }
-            )],
-        'layout': go.Layout(
-            xaxis={
-                'title': 'Dimension',
-                'type': 'linear'
-            },
-            yaxis={
-                'title': 'Error(%)',
-                'type': 'linear'
-            },
-            margin={'l': 40, 'b': 40, 't': 10, 'r': 0},
-            hovermode='closest'
-        )
-    }

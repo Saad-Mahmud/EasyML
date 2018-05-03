@@ -219,7 +219,7 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
         return children
 
 
-def dr_maker(algo,text):
+def dr_maker(algo,text,):
     features = list(page1df)
     features.remove(text)
     #print(features)

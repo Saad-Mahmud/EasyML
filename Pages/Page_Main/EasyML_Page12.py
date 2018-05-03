@@ -6,6 +6,7 @@ import dash_table_experiments as dt
 from dash.dependencies import Input, Output
 import pandas as pd
 import copy
+import urllib.parse
 from Pages.Page_UTIL import Static as st
 from EasyML_Init import EM_App as app
 from pandasql import sqldf
@@ -61,6 +62,7 @@ layout = html.Div([
         # Allow multiple files to be uploaded
         multiple=True
     ),
+
     html.Button("Download table", id="page12_btn2", style={
         'background-color': '#7386D5',
         'border': '1%',
@@ -77,10 +79,20 @@ layout = html.Div([
         'font-size': '90%',
         'font-family': 'Helvetica'
     }),
+    html.Div
+        (
+            children='Download link: ',
+            style={
+            'font-size': '20px'
+            },
+            id="link"
+    ),
     dcc.Input(id='page12_queryBox', placeholder='Place query here...\n', type='text', style={
-        'width': '100%', 'margin-top': '2%', 'margin-bottom': '2%'}),
-    html.H5('', id='page12_downLink'),
-    html.H5('', id='page12_testText'),
+        'width': '100%', 'margin-top': '2%', 'margin-bottom': '0.5%'}),
+    html.H4(
+        style={'font-size': '20px', 'font-family': 'Ubuntu', 'color': 'grey', 'margin-bottom': '2', 'white-space': 'pre-wrap'},
+        children="The tables are named table1 and table2.\nAttributes with multiple word name should have single quotation marks around them.\nThe output table can be found below. Please scroll down."
+    ),
     html.Div(id='page12_output-data-upload1', style={
         'position': 'absolute', 'left': '1%', 'width': '49%'
     }),
@@ -88,7 +100,7 @@ layout = html.Div([
         'position': 'absolute', 'left': '50.5%', 'width': '49%'
     }),
     html.Div(id='page12_test', style={
-        'position': 'absolute', 'width': '90%', 'top': '130%', 'left': '5%'
+        'position': 'absolute', 'width': '90%', 'top': '150%', 'left': '5%'
     }),
     html.Div(dt.DataTable(rows=[{}]), style={'display': 'none'})
 ])
@@ -120,8 +132,7 @@ def page12_parse_contents(contents, filename, datatime, i):
 
     return html.Div([
         html.H5('table' + str(i)),
-        dt.DataTable(rows=df.to_dict('records')),
-        html.Hr()
+        dt.DataTable(rows=df.to_dict('records'))
     ])
 
 
@@ -151,18 +162,22 @@ def page12_update_output2(list_of_contents, list_of_names, list_of_dates):
 
 
 @app.callback(
-    Output('page12_downLink', 'children'),
+    Output('link', 'children'),
     [Input('page12_btn2', 'n_clicks')])
 def page12_downloadTable(n_clicks):
     # Download table here
     df_3 = copy.deepcopy(st.a.tab3)
     print(df_3)
-    try:
-        df_3.to_csv("output_filename.csv", index=False, encoding='utf8', header=True)
-    except Exception as e:
-        # return df_3.to_html()
-        return
-    return
+    df_3.to_csv("output_filename.csv", index=False, encoding='utf8', header=True)
+    csv_string = df_3.to_csv(index=False, encoding='utf-8')
+    csv_string = "data:text/csv;charset=utf-8," + urllib.parse.quote(csv_string)
+    return [html.A(
+        "Download Link".format(n_clicks),
+        id='download-link14',
+        download="rawdata.csv",
+        href=csv_string,
+        target="_blank"
+    )]
 
 
 @app.callback(
@@ -185,8 +200,7 @@ def page12_runQuery(n_clicks, value):
             return html.Div([
                 html.H5('New Table', style={'margin-top':'5%'}),
                 dt.DataTable(rows=st.a.tab3.to_dict('records'),
-                             row_selectable=True, filterable=True, sortable=True, selected_row_indices=[], ),
-                html.Hr()
+                             row_selectable=True, filterable=True, sortable=True, selected_row_indices=[], )
             ])
         except Exception as e:
             strr = str(e)

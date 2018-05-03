@@ -84,7 +84,7 @@ def finalDataR(l,r):
     return csv_string
 
 def ranklist():
-    ls = [{'Feature': i[0],'Variance': i[1]} for i in EasyML_Page11.util.RankofF]
+    ls = [{'Feature': i[0],'Rank': i[1]} for i in EasyML_Page11.util.RankofF]
 
     return html.Div([
         html.Div([
