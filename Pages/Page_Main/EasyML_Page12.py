@@ -166,6 +166,8 @@ def page12_update_output2(list_of_contents, list_of_names, list_of_dates):
     [Input('page12_btn2', 'n_clicks')])
 def page12_downloadTable(n_clicks):
     # Download table here
+    if(n_clicks==None):return
+    if(st.a.tab3==None):return
     df_3 = copy.deepcopy(st.a.tab3)
     print(df_3)
     df_3.to_csv("output_filename.csv", index=False, encoding='utf8', header=True)

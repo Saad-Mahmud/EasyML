@@ -58,6 +58,7 @@ def display_page(pathname):
     elif (pathname == '/test/page11'):
         return EasyML_Page11.layout
     elif (pathname == '/test/page12'):
+        EasyML_Page12.st.a.__init__()
         return EasyML_Page12.layout
     elif (pathname == '/test/page13'):
         return EasyML_Page13.layout
